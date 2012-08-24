@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/recaptchalib.php';
+require_once __DIR__ . '/recaptchalib/recaptchalib.php';
 
 
 /**
