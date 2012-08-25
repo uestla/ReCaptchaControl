@@ -111,6 +111,10 @@ class ReCaptcha
 
 
 
+	/**
+	 * @param  array
+	 * @return array
+	 */
 	protected function request(array $params)
 	{
 		$server = 'www.google.com';
