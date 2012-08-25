@@ -128,7 +128,7 @@ class ReCaptcha
 			. $query;
 
 		if (($socket = @fsockopen($server, 80)) === FALSE) {
-			throw new Exception("Could not open socket to $server.");
+			throw new Exception("Could not open socket to '$server'.");
 		}
 
 		fwrite($socket, $header);
