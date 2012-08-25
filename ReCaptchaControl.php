@@ -79,9 +79,9 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 		static::$publicKey = $publicKey;
 		static::$privateKey = $privateKey;
 
-		$class = __CLASS__;
-		Forms\Container::extensionMethod('addReCaptcha', function ($container, $name, $label = NULL) use ($class, $httpRequest) {
-			return $container[$name] = new $class( $httpRequest, $label );
+		$static = __CLASS__;
+		Forms\Container::extensionMethod('addReCaptcha', function ($container, $name, $label = NULL) use ($static, $httpRequest) {
+			return $container[$name] = new $static( $httpRequest, $label );
 		});
 	}
 }
