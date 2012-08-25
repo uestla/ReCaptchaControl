@@ -85,7 +85,7 @@ class ReCaptcha
 	/**
 	 * @param  string
 	 * @param  array
-	 * @return bool
+	 * @return Response
 	 */
 	function validate($remoteAddress, array $post)
 	{
