@@ -1,5 +1,8 @@
 <?php
 
+use Nette\Http;
+use Nette\Utils\Html;
+
 require_once __DIR__ . '/recaptchalib/recaptchalib.php';
 
 
@@ -10,7 +13,7 @@ require_once __DIR__ . '/recaptchalib/recaptchalib.php';
  */
 class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 {
-	/** @var Nette\Http\Request */
+	/** @var Http\Request */
 	protected $httpRequest;
 
 	/** @var string */
@@ -22,10 +25,10 @@ class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 
 
 	/**
-	 * @param  Nette\Http\Request
+	 * @param  Http\Request
 	 * @param  string
 	 */
-	function __construct(Nette\Http\Request $httpRequest, $caption = NULL)
+	function __construct(Http\Request $httpRequest, $caption = NULL)
 	{
 		parent::__construct($caption);
 		$this->httpRequest = $httpRequest;
@@ -33,10 +36,10 @@ class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 
 
 
-	/** @return Nette\Utils\Html */
+	/** @return Html */
 	function getControl()
 	{
-		return Nette\Utils\Html::el(NULL)->setHtml( recaptcha_get_html( static::$publicKey ) );
+		return Html::el(NULL)->setHtml( recaptcha_get_html( static::$publicKey ) );
 	}
 
 
@@ -56,7 +59,7 @@ class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 
 
 
-	/** @return Nette\Http\Request */
+	/** @return Http\Request */
 	function getHttpRequest()
 	{
 		return $this->httpRequest;
@@ -65,12 +68,12 @@ class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 
 
 	/**
-	 * @param  Nette\Http\Request
+	 * @param  Http\Request
 	 * @param  string
 	 * @param  string
 	 * @return void
 	 */
-	static function register(Nette\Http\Request $httpRequest, $publicKey, $privateKey)
+	static function register(Http\Request $httpRequest, $publicKey, $privateKey)
 	{
 		static::$publicKey = $publicKey;
 		static::$privateKey = $privateKey;
