@@ -4,8 +4,6 @@ use Nette\Http;
 use Nette\Forms;
 use Nette\Utils\Html;
 
-require_once __DIR__ . '/recaptchalib/recaptchalib.php';
-
 
 /**
  * Nette\Forms reCAPTCHA implementation
@@ -17,11 +15,20 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	/** @var Http\Request */
 	protected $httpRequest;
 
+	/** @var ReCaptcha\ReCaptcha */
+	protected $reCaptcha;
+
 	/** @var string */
 	protected static $privateKey;
 
 	/** @var string */
 	protected static $publicKey;
+
+	/** @var string|NULL */
+	protected static $error;
+
+	/** @var bool */
+	protected static $secured;
 
 
 
@@ -33,6 +40,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	{
 		parent::__construct($caption);
 		$this->httpRequest = $httpRequest;
+		$this->reCaptcha = new ReCaptcha\ReCaptcha( static::$publicKey, static::$privateKey, static::$error, static::$secured );
 	}
 
 
@@ -40,7 +48,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	/** @return Html */
 	function getControl()
 	{
-		return Html::el(NULL)->setHtml( recaptcha_get_html( static::$publicKey ) );
+		return $this->reCaptcha->getHtml();
 	}
 
 
@@ -48,14 +56,8 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	/** @return bool */
 	static function validateValid(Forms\IControl $control)
 	{
-		$response = recaptcha_check_answer(
-			static::$privateKey,
-			$control->httpRequest->remoteAddress,
-			$control->httpRequest->getPost('recaptcha_challenge_field'),
-			$control->httpRequest->getPost('recaptcha_response_field')
-		);
-
-		return $response->is_valid;
+		$httpRequest = $control->httpRequest;
+		return $control->reCaptcha->validate( $httpRequest->remoteAddress , $httpRequest->getPost() )->isValid();
 	}
 
 
@@ -68,16 +70,26 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 
 
+	/** @return ReCaptcha\ReCaptcha */
+	function getReCaptcha()
+	{
+		return $this->reCaptcha;
+	}
+
+
+
 	/**
 	 * @param  Http\Request
 	 * @param  string
 	 * @param  string
 	 * @return void
 	 */
-	static function register(Http\Request $httpRequest, $publicKey, $privateKey)
+	static function register(Http\Request $httpRequest, $publicKey, $privateKey, $error = NULL, $secured = FALSE)
 	{
 		static::$publicKey = $publicKey;
 		static::$privateKey = $privateKey;
+		static::$error = $error;
+		static::$secured = $secured;
 
 		$static = __CLASS__;
 		Forms\Container::extensionMethod('addReCaptcha', function ($container, $name, $label = NULL) use ($static, $httpRequest) {
