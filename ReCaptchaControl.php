@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Http;
+use Nette\Forms;
 use Nette\Utils\Html;
 
 require_once __DIR__ . '/recaptchalib/recaptchalib.php';
@@ -11,7 +12,7 @@ require_once __DIR__ . '/recaptchalib/recaptchalib.php';
  *
  * @author kesspess
  */
-class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
+class ReCaptchaControl extends Forms\Controls\BaseControl
 {
 	/** @var Http\Request */
 	protected $httpRequest;
@@ -45,7 +46,7 @@ class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 
 
 	/** @return bool */
-	static function validateValid(Nette\Forms\IControl $control)
+	static function validateValid(Forms\IControl $control)
 	{
 		$response = recaptcha_check_answer(
 			static::$privateKey,
@@ -79,7 +80,7 @@ class ReCaptchaControl extends Nette\Forms\Controls\BaseControl
 		static::$privateKey = $privateKey;
 
 		$class = __CLASS__;
-		Nette\Forms\Container::extensionMethod('addReCaptcha', function ($container, $name, $label = NULL) use ($class, $httpRequest) {
+		Forms\Container::extensionMethod('addReCaptcha', function ($container, $name, $label = NULL) use ($class, $httpRequest) {
 			return $container[$name] = new $class( $httpRequest, $label );
 		});
 	}
