@@ -123,7 +123,8 @@ class ReCaptcha
 		$context = stream_context_create(array(
 			'http' => array(
 				'method' => 'POST',
-				'header' => "Content-Type: application/x-www-form-urlencoded;\r\n\r\n",
+				'header' => "Content-Type: application/x-www-form-urlencoded;"
+							. "\r\n",
 				'content' => http_build_query( $params ),
 			),
 		));
