@@ -5,6 +5,9 @@ namespace ReCaptcha;
 use Nette\Utils\Html;
 use Nette\Utils\Strings;
 
+require_once __DIR__ . '/Response.php';
+require_once __DIR__ . '/Exception.php';
+
 
 /**
  * ReCaptcha PHP class
@@ -105,7 +108,7 @@ class ReCaptcha
 			'response' => $post[ $reKey ],
 		));
 
-		list ($answer, $error) = explode("\n", $response[1]);
+		list ($answer, $error) = explode("\n", $response);
 		return Strings::trim($answer) === 'true' ? new Response(TRUE) : new Response(FALSE, $error);
 	}
 
@@ -117,28 +120,18 @@ class ReCaptcha
 	 */
 	protected function request(array $params)
 	{
-		$server = 'www.google.com';
-		$query = http_build_query($params);
+		$context = stream_context_create(array(
+			'http' => array(
+				'method' => 'POST',
+				'header' => "Content-Type: application/x-www-form-urlencoded;\r\n\r\n",
+				'content' => http_build_query( $params ),
+			),
+		));
 
-		$header = "POST /recaptcha/api/verify HTTP/1.0\r\n"
-			. "Host: $server\r\n"
-			. "Content-Type: application/x-www-form-urlencoded;\r\n"
-			. "Content-Length: " . strlen($query) . "\r\n"
-			. "User-Agent: Booyakasha\r\n\r\n"
-			. $query;
+		$fp = fopen('http://www.google.com/recaptcha/api/verify', 'r', FALSE, $context);
+		$response = stream_get_contents($fp);
+		fclose($fp);
 
-		if (($socket = @fsockopen($server, 80)) === FALSE) {
-			throw new Exception("Could not open socket to '$server'.");
-		}
-
-		fwrite($socket, $header);
-		$response = '';
-
-		while (!feof($socket)) {
-			$response .= fgets($socket, 1160);
-		}
-
-		fclose($socket);
-		return explode("\r\n\r\n", $response, 2);
+		return $response;
 	}
 }
