@@ -4,14 +4,19 @@ reCAPTCHA for Nette Framework
 Usage
 -----
 
-**bootstrap.php**
+**config.neon**
 
-```php
-$reCaptcha = new ReCaptcha\ReCaptcha( '<your_public_key>', '<your_private_key>' );
-
-$controlFactory = new ReCaptchaControlFactory( $reCaptcha, $container->httpRequest );
-$controlFactory->register();
 ```
+services:
+	reCaptcha: ReCaptcha\ReCaptcha( '<your_public_key>', '<your_private_key>' )
+
+	reCaptchaControlFactory:
+		factory: ReCaptchaControlFactory( ..., ... )
+		setup:
+			- register()
+		run: TRUE
+```
+
 
 **Form**
 
