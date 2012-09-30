@@ -46,7 +46,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	static function validateValid(Forms\IControl $control)
 	{
 		$httpRequest = $control->httpRequest;
-		return $control->reCaptcha->validate( $httpRequest->remoteAddress , $httpRequest->getPost() )->isValid();
+		return $control->reCaptcha->validate( $httpRequest->getRemoteAddress(), $httpRequest->getPost() )->isValid();
 	}
 
 
