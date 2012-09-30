@@ -6,7 +6,6 @@ use Nette\Utils\Html;
 use Nette\Utils\Strings;
 
 require_once __DIR__ . '/Response.php';
-require_once __DIR__ . '/Exception.php';
 
 
 /**
