@@ -12,23 +12,11 @@ use Nette\Utils\Html;
  */
 class ReCaptchaControl extends Forms\Controls\BaseControl
 {
-	/** @var Http\Request */
-	protected $httpRequest;
-
 	/** @var ReCaptcha\ReCaptcha */
 	protected $reCaptcha;
 
-	/** @var string */
-	protected static $privateKey;
-
-	/** @var string */
-	protected static $publicKey;
-
-	/** @var string|NULL */
-	protected static $error;
-
-	/** @var bool */
-	protected static $secured;
+	/** @var Http\Request */
+	protected $httpRequest;
 
 
 
@@ -36,11 +24,12 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	 * @param  Http\Request
 	 * @param  string
 	 */
-	function __construct(Http\Request $httpRequest, $caption = NULL)
+	function __construct(ReCaptcha\ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
 	{
 		parent::__construct($caption);
+
+		$this->reCaptcha = $reCaptcha;
 		$this->httpRequest = $httpRequest;
-		$this->reCaptcha = new ReCaptcha\ReCaptcha( static::$publicKey, static::$privateKey, static::$error, static::$secured );
 	}
 
 
@@ -74,26 +63,5 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	function getReCaptcha()
 	{
 		return $this->reCaptcha;
-	}
-
-
-
-	/**
-	 * @param  Http\Request
-	 * @param  string
-	 * @param  string
-	 * @return void
-	 */
-	static function register(Http\Request $httpRequest, $publicKey, $privateKey, $error = NULL, $secured = FALSE)
-	{
-		static::$publicKey = $publicKey;
-		static::$privateKey = $privateKey;
-		static::$error = $error;
-		static::$secured = $secured;
-
-		$static = __CLASS__;
-		Forms\Container::extensionMethod('addReCaptcha', function ($container, $name, $label = NULL) use ($static, $httpRequest) {
-			return $container[$name] = new $static( $httpRequest, $label );
-		});
 	}
 }

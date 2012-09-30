@@ -7,7 +7,10 @@ Usage
 **bootstrap.php**
 
 ```php
-ReCaptchaControl::register( $container->httpRequest, '<your_public_key>', '<your_private_key>' );
+$reCaptcha = new ReCaptcha\ReCaptcha( '<your_public_key>', '<your_private_key>' );
+
+$controlFactory = new ReCaptchaControlFactory( $reCaptcha, $container->httpRequest );
+$controlFactory->register();
 ```
 
 **Form**
