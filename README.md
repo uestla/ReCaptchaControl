@@ -1,6 +1,9 @@
 reCAPTCHA for Nette Framework
 =============================
 
+Forum: http://forum.nette.org/cs/11914-recaptcha-pro-nette-forms
+
+
 Usage
 -----
 
