@@ -10,14 +10,10 @@ Usage
 **config.neon**
 
 ```
-services:
-	reCaptcha: ReCaptcha\ReCaptcha( '<your_public_key>', '<your_private_key>' )
-
-	reCaptchaControlFactory:
-		factory: ReCaptchaControlFactory( ..., ... )
-		setup:
-			- register()
-		run: TRUE
+recaptcha:
+	publicKey: '<your_public_key>'
+	privateKey: '<your_private_key>'
+	methodName: 'addRecaptcha' # optional
 ```
 
 

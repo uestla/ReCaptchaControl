@@ -4,7 +4,7 @@
 /**
  * Nette\Forms reCAPTCHA compiler extension
  *
- * @author kesspess
+ * @author vojtech-dobes (https://github.com/vojtech-dobes)
  */
 class ReCaptchaExtension extends Nette\Object
 {
@@ -34,7 +34,7 @@ class ReCaptchaExtension extends Nette\Object
 		$initialize = $class->methods['initialize'];
 		$container = $this->getContainerBuilder();
 		$config = $this->getConfig($this->defaults);
- 
+
 		$initialize->addBody('$context = $this;');
 		$initialize->addBody('Nette\Forms\Container::extensionMethod(?, function ($container, $name, $label = NULL) use ($context) {
 			return $container[$name] = new ReCaptchaControl($context->getService(?), $context->getByType(\'Nette\Http\IRequest\'), $label);
