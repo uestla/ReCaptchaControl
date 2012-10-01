@@ -27,7 +27,7 @@ recaptcha:
 
 ```php
 $form->addReCaptcha('captcha')
-  	->addRule( Form::VALID, 'Incorrect text code.' );
+		->addRule( Form::VALID, 'Incorrect text code.' );
 ```
 
 It's that simple !
