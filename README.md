@@ -9,9 +9,7 @@ Usage
 
 **bootstrap.php**
 ```php
-$configurator->onCompile[] = function ($configurator, $compiler) {
-	$compiler->addExtension('recaptcha', new ReCaptchaExtension);
-};
+ReCaptchaExtension::register( $configurator );
 ```
 
 
