@@ -7,6 +7,14 @@ Forum: http://forum.nette.org/cs/11914-recaptcha-pro-nette-forms
 Usage
 -----
 
+**bootstrap.php**
+```php
+$configurator->onCompile[] = function ($configurator, $compiler) {
+	$compiler->addExtension('recaptcha', new ReCaptchaExtension);
+};
+```
+
+
 **config.neon**
 
 ```
