@@ -6,7 +6,7 @@
  *
  * @author vojtech-dobes (https://github.com/vojtech-dobes)
  */
-class ReCaptchaExtension extends Nette\Object
+class ReCaptchaExtension extends Nette\Config\CompilerExtension
 {
 
 	/** @var string[] */
