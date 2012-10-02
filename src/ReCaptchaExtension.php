@@ -18,20 +18,12 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 
 
 
-	/** @param  string */
-	function __construct($prefix)
-	{
-		$this->prefix = $prefix;
-	}
-
-
-
 	function loadConfiguration()
 	{
 		$container = $this->getContainerBuilder();
 		$config = $this->getConfig();
 
-		$container->addDefinition( $this->prefix( $this->prefix ) )
+		$container->addDefinition( $this->prefix('recaptcha') )
 				->setClass( 'ReCaptcha\ReCaptcha', array( $config['publicKey'], $config['privateKey'] ) );
 	}
 
@@ -45,7 +37,7 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 		$initialize->addBody('$context = $this;');
 		$initialize->addBody('Nette\Forms\Container::extensionMethod(?, function ($container, $name, $label = NULL) use ($context) {
 			return $container[$name] = new ReCaptchaControl($context->getService(?), $context->getByType(\'Nette\Http\IRequest\'), $label);
-		});', array( $config['methodName'], $this->prefix( $this->prefix ) ));
+		});', array( $config['methodName'], $this->prefix('recaptcha') ));
 	}
 
 
@@ -53,7 +45,7 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 	static function register(Nette\Config\Configurator $configurator, $prefix = 'recaptcha')
 	{
 		$configurator->onCompile[] = function ($configurator, $compiler) use ($prefix) {
-			$compiler->addExtension( $prefix, new ReCaptchaExtension($prefix) );
+			$compiler->addExtension( $prefix, new ReCaptchaExtension );
 		};
 	}
 }
