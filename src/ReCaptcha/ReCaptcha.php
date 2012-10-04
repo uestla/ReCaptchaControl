@@ -115,7 +115,7 @@ class ReCaptcha
 
 	/**
 	 * @param  array
-	 * @return array
+	 * @return string
 	 */
 	protected function request(array $params)
 	{
