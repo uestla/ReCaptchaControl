@@ -37,6 +37,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	/** @return Html */
 	function getControl()
 	{
+		$this->setOption('rendered', TRUE);
 		return $this->reCaptcha->getHtml();
 	}
 
