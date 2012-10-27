@@ -35,9 +35,8 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 		$config = $this->getConfig( $this->defaults );
 
 		$initialize->addBody('$context = $this;');
-		$initialize->addBody('Nette\Forms\Container::extensionMethod(?, function ($container, $name, $label = NULL) use ($context) {
-			return $container[$name] = new ReCaptchaControl($context->getService(?), $context->getByType(\'Nette\Http\IRequest\'), $label);
-		});', array( $config['methodName'], $this->prefix('recaptcha') ));
+		$initialize->addBody('ReCaptchaControl::register( $context->getByType(\'Nette\Http\IRequest\'), $context->getService(?), ? );',
+				array( $this->prefix('recaptcha'), $config['methodName'] ));
 	}
 
 

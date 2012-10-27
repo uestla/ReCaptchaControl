@@ -65,4 +65,14 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	{
 		return $this->reCaptcha;
 	}
+
+
+
+	/** @return void */
+	static function register(Http\Request $httpRequest, ReCaptcha\ReCaptcha $reCaptcha, $method = 'addRecaptcha')
+	{
+		Nette\Forms\Container::extensionMethod( $method, function ($container, $name, $label = NULL) use ($httpRequest, $reCaptcha) {
+			return $container[$name] = new ReCaptchaControl( $reCaptcha, $httpRequest, $label );
+		} );
+	}
 }
