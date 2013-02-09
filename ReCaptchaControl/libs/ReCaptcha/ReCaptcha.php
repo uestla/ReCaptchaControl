@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * This file is part of the ReCaptchaExtension package
+ *
+ * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
+ *
+ * @license  MIT
+ * @link     https://github.com/uestla/ReCaptchaControl
+ */
+
+
 namespace ReCaptcha;
 
 use Nette\Utils\Html;

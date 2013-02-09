@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ReCaptchaExtension package
+ *
+ * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
+ *
+ * @license  MIT
+ * @link     https://github.com/uestla/ReCaptchaControl
+ */
+
 
 /**
  * Nette\Forms reCAPTCHA compiler extension
@@ -18,6 +27,7 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 
 
 
+	/** @return void */
 	function loadConfiguration()
 	{
 		$container = $this->getContainerBuilder();
@@ -29,6 +39,10 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 
 
 
+	/**
+	 * @param  Nette\Utils\PhpGenerator\ClassType
+	 * @return void
+	 */
 	function afterCompile(Nette\Utils\PhpGenerator\ClassType $class)
 	{
 		$initialize = $class->methods['initialize'];
@@ -41,6 +55,11 @@ class ReCaptchaExtension extends Nette\Config\CompilerExtension
 
 
 
+	/**
+	 * @param  Nette\Config\Configurator
+	 * @param  string
+	 * @return void
+	 */
 	static function register(Nette\Config\Configurator $configurator, $prefix = 'recaptcha')
 	{
 		$configurator->onCompile[] = function ($configurator, $compiler) use ($prefix) {
