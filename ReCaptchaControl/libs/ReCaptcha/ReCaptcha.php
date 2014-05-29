@@ -9,7 +9,6 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
-
 namespace ReCaptcha;
 
 use Nette\Utils\Html;
@@ -25,6 +24,7 @@ require_once __DIR__ . '/Response.php';
  */
 class ReCaptcha
 {
+
 	/** @var string */
 	protected $publicKey;
 
@@ -38,12 +38,11 @@ class ReCaptcha
 	protected $secured;
 
 
-
 	/**
-	 * @param  string
-	 * @param  string
-	 * @param  string|NULL
-	 * @param  bool
+	 * @param  string $publicKey
+	 * @param  string $privateKey
+	 * @param  string|NULL $error
+	 * @param  bool $secured
 	 */
 	function __construct($publicKey, $privateKey, $error = NULL, $secured = FALSE)
 	{
@@ -52,7 +51,6 @@ class ReCaptcha
 		$this->error = $error;
 		$this->secured = (bool) $secured;
 	}
-
 
 
 	/** @return Html */
@@ -93,10 +91,9 @@ class ReCaptcha
 	}
 
 
-
 	/**
-	 * @param  string
-	 * @param  array
+	 * @param  string $remoteAddress
+	 * @param  array $post
 	 * @return Response
 	 */
 	function validate($remoteAddress, array $post)
@@ -122,9 +119,8 @@ class ReCaptcha
 	}
 
 
-
 	/**
-	 * @param  array
+	 * @param  array $params
 	 * @return string
 	 */
 	protected function request(array $params)
@@ -144,4 +140,5 @@ class ReCaptcha
 
 		return $response;
 	}
+
 }

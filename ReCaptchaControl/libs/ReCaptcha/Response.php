@@ -9,18 +9,17 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
-
 namespace ReCaptcha;
 
 
 class Response
 {
+
 	/** @var bool */
 	protected $valid = FALSE;
 
 	/** @var string */
 	protected $message = NULL;
-
 
 
 	function __construct($valid, $message = NULL)
@@ -30,7 +29,6 @@ class Response
 	}
 
 
-
 	/** @return bool */
 	function isValid()
 	{
@@ -38,10 +36,10 @@ class Response
 	}
 
 
-
 	/** @return string */
 	function getMessage()
 	{
 		return $this->message;
 	}
+
 }

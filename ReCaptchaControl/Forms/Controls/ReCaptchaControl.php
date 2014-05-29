@@ -9,7 +9,6 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
-
 use Nette\Http;
 use Nette\Forms;
 use Nette\Utils\Html;
@@ -22,12 +21,12 @@ use Nette\Utils\Html;
  */
 class ReCaptchaControl extends Forms\Controls\BaseControl
 {
+
 	/** @var ReCaptcha\ReCaptcha */
 	protected $reCaptcha;
 
 	/** @var Http\Request */
 	protected $httpRequest;
-
 
 
 	/**
@@ -43,14 +42,12 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
-
 	/** @return Html */
 	function getControl()
 	{
 		$this->setOption('rendered', TRUE);
 		return $this->reCaptcha->getHtml();
 	}
-
 
 
 	/** @return bool */
@@ -61,13 +58,11 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
-
 	/** @return Http\Request */
 	function getHttpRequest()
 	{
 		return $this->httpRequest;
 	}
-
 
 
 	/** @return ReCaptcha\ReCaptcha */
@@ -77,7 +72,6 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
-
 	/** @return void */
 	static function register(Http\Request $httpRequest, ReCaptcha\ReCaptcha $reCaptcha, $method = 'addRecaptcha')
 	{
@@ -85,4 +79,5 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 			return $container[$name] = new ReCaptchaControl( $reCaptcha, $httpRequest, $label );
 		} );
 	}
+
 }
