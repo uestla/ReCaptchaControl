@@ -1,13 +1,15 @@
 <?php
 
 /**
- * This file is part of the ReCaptchaExtension package
+ * This file is part of the ReCaptchaControl package
  *
  * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
  *
  * @license  MIT
  * @link     https://github.com/uestla/ReCaptchaControl
  */
+
+namespace ReCaptchaControl;
 
 use Nette\Http;
 use Nette\Forms;
@@ -30,8 +32,9 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 
 	/**
-	 * @param  Http\Request
-	 * @param  string
+	 * @param  ReCaptcha\ReCaptcha $reCaptcha
+	 * @param  Http\Request $httpRequest
+	 * @param  string $caption
 	 */
 	function __construct(ReCaptcha\ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
 	{
@@ -50,11 +53,14 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
-	/** @return bool */
+	/**
+	 * @param  Forms\IControl $control
+	 * @return bool
+	 */
 	static function validateValid(Forms\IControl $control)
 	{
 		$httpRequest = $control->httpRequest;
-		return $control->reCaptcha->validate( $httpRequest->remoteAddress , $httpRequest->post )->isValid();
+		return $control->reCaptcha->validate($httpRequest->remoteAddress, $httpRequest->post)->isValid();
 	}
 
 
@@ -72,12 +78,17 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
-	/** @return void */
+	/**
+	 * @param  Http\Request $httpRequest
+	 * @param  ReCaptcha\ReCaptcha $reCaptcha
+	 * @param  string
+	 * @return void
+	 */
 	static function register(Http\Request $httpRequest, ReCaptcha\ReCaptcha $reCaptcha, $method = 'addRecaptcha')
 	{
-		Nette\Forms\Container::extensionMethod( $method, function ($container, $name, $label = NULL) use ($httpRequest, $reCaptcha) {
-			return $container[$name] = new ReCaptchaControl( $reCaptcha, $httpRequest, $label );
-		} );
+		Forms\Container::extensionMethod($method, function ($container, $name, $label = NULL) use ($httpRequest, $reCaptcha) {
+			return $container[$name] = new ReCaptchaControl($reCaptcha, $httpRequest, $label);
+		});
 	}
 
 }

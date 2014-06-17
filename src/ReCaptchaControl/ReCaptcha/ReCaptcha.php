@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the ReCaptchaExtension package
+ * This file is part of the ReCaptchaControl package
  *
  * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
  *
@@ -9,12 +9,10 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
-namespace ReCaptcha;
+namespace ReCaptchaControl\ReCaptcha;
 
 use Nette\Utils\Html;
 use Nette\Utils\Strings;
-
-require_once __DIR__ . '/Response.php';
 
 
 /**
@@ -58,19 +56,19 @@ class ReCaptcha
 	{
 		$server = $this->secured ? 'https://www.google.com/recaptcha/api' : 'http://www.google.com/recaptcha/api';
 
-		$query = http_build_query( array(
+		$query = http_build_query(array(
 			'k' => $this->publicKey,
 			'error' => $this->error,
-		) );
+		));
 
 		$script = Html::el('script')
 				->type('text/javascript')
-				->src( $server . '/challenge?' . $query );
+				->src($server . '/challenge?' . $query);
 
 		$noscript = Html::el('noscript');
 
 		$iframe = Html::el('iframe')
-				->src( $server . '/noscript?' . $query )
+				->src($server . '/noscript?' . $query)
 				->width(500)
 				->height(300)
 				->frameborder(0);
@@ -86,8 +84,8 @@ class ReCaptcha
 				->value('manual_challenge');
 
 		return Html::el(NULL)
-				->add( $script )
-				->add( $noscript->add( $iframe )->add( Html::el('br') )->add( $textarea )->add( $input ) );
+				->add($script)
+				->add($noscript->add($iframe)->add(Html::el('br'))->add($textarea)->add($input));
 	}
 
 
@@ -101,17 +99,17 @@ class ReCaptcha
 		$chKey = 'recaptcha_challenge_field';
 		$reKey = 'recaptcha_response_field';
 
-		if (!isset($post[ $chKey ], $post[ $reKey ])
-				|| !strlen( Strings::trim( $post[ $chKey ] ) )
-				|| !strlen( Strings::trim( $post[ $reKey ] ) )) {
+		if (!isset($post[$chKey], $post[$reKey])
+				|| !strlen(Strings::trim($post[$chKey]))
+				|| !strlen(Strings::trim($post[$reKey]))) {
 			return new Response(FALSE, 'incorrect-captcha-sol');
 		}
 
 		$response = $this->request(array(
 			'privatekey' => $this->privateKey,
 			'remoteip' => $remoteAddress,
-			'challenge' => $post[ $chKey ],
-			'response' => $post[ $reKey ],
+			'challenge' => $post[$chKey],
+			'response' => $post[$reKey],
 		));
 
 		list ($answer, $error) = explode("\n", $response);
@@ -130,7 +128,7 @@ class ReCaptcha
 				'method' => 'POST',
 				'header' => "Content-Type: application/x-www-form-urlencoded;"
 							. "\r\n",
-				'content' => http_build_query( $params ),
+				'content' => http_build_query($params),
 			),
 		));
 

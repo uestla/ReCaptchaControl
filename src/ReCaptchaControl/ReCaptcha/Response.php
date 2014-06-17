@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the ReCaptchaExtension package
+ * This file is part of the ReCaptchaControl package
  *
  * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
  *
@@ -9,7 +9,7 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
-namespace ReCaptcha;
+namespace ReCaptchaControl\ReCaptcha;
 
 
 class Response
