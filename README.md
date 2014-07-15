@@ -9,7 +9,7 @@ Usage
 
 **bootstrap.php**
 ```php
-ReCaptchaExtension::register($configurator);
+ReCaptchaControl\ReCaptchaExtension::register($configurator);
 ```
 
 
