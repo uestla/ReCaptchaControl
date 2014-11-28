@@ -20,6 +20,7 @@ recaptcha:
 	publicKey: '<your_public_key>'
 	privateKey: '<your_private_key>'
 	methodName: 'addRecaptcha' # optional
+	secured: false # defaults - change to true if you use https
 ```
 
 
