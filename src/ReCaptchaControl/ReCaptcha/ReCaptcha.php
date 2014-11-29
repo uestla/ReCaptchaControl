@@ -49,7 +49,7 @@ class ReCaptcha
 	/** @return Html */
 	function getHtml()
 	{
-		$server = $this->secured ? 'https://www.google.com/recaptcha/api' : 'http://www.google.com/recaptcha/api';
+		$server = ($this->secured ? 'https' : 'http') . '://www.google.com/recaptcha/api';
 
 		$query = http_build_query(array(
 			'error' => NULL,
@@ -121,8 +121,7 @@ class ReCaptcha
 		$context = stream_context_create(array(
 			'http' => array(
 				'method' => 'POST',
-				'header' => "Content-Type: application/x-www-form-urlencoded;"
-							. "\r\n",
+				'header' => "Content-Type: application/x-www-form-urlencoded;\r\n",
 				'content' => http_build_query($params),
 			),
 		));
