@@ -39,7 +39,7 @@ class ReCaptchaExtension extends Nette\DI\CompilerExtension
 		$config = $this->getConfig($this->defaults);
 
 		$container->addDefinition($this->prefix('recaptcha'))
-				->setClass('ReCaptchaControl\ReCaptcha\ReCaptcha', array($config['publicKey'], $config['privateKey'], NULL, $config['secured']));
+				->setClass('ReCaptchaControl\ReCaptcha\ReCaptcha', array($config['publicKey'], $config['privateKey'], $config['secured']));
 	}
 
 

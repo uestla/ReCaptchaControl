@@ -29,9 +29,6 @@ class ReCaptcha
 	/** @var string */
 	protected $privateKey;
 
-	/** @var string|NULL */
-	protected $error;
-
 	/** @var bool */
 	protected $secured;
 
@@ -39,14 +36,12 @@ class ReCaptcha
 	/**
 	 * @param  string $publicKey
 	 * @param  string $privateKey
-	 * @param  string|NULL $error
 	 * @param  bool $secured
 	 */
-	function __construct($publicKey, $privateKey, $error = NULL, $secured = FALSE)
+	function __construct($publicKey, $privateKey, $secured = FALSE)
 	{
 		$this->publicKey = $publicKey;
 		$this->privateKey = $privateKey;
-		$this->error = $error;
 		$this->secured = (bool) $secured;
 	}
 
@@ -57,8 +52,8 @@ class ReCaptcha
 		$server = $this->secured ? 'https://www.google.com/recaptcha/api' : 'http://www.google.com/recaptcha/api';
 
 		$query = http_build_query(array(
+			'error' => NULL,
 			'k' => $this->publicKey,
-			'error' => $this->error,
 		));
 
 		$script = Html::el('script')
