@@ -3,7 +3,7 @@
 /**
  * This file is part of the ReCaptchaControl package
  *
- * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
+ * Copyright (c) 2015 Petr Kessler (http://kesspess.1991.cz)
  *
  * @license  MIT
  * @link     https://github.com/uestla/ReCaptchaControl
@@ -25,7 +25,6 @@ class ReCaptchaExtension extends Nette\DI\CompilerExtension
 	/** @var string[] */
 	protected $defaults = array(
 		'methodName' => 'addReCaptcha',
-		'secured' => FALSE,
 	);
 
 	/** @var string */
@@ -39,7 +38,7 @@ class ReCaptchaExtension extends Nette\DI\CompilerExtension
 		$config = $this->getConfig($this->defaults);
 
 		$container->addDefinition($this->prefix('recaptcha'))
-				->setClass('ReCaptchaControl\ReCaptcha\ReCaptcha', array($config['publicKey'], $config['privateKey'], $config['secured']));
+				->setClass('ReCaptchaControl\ReCaptcha', array($config['siteKey'], $config['secretKey']));
 	}
 
 

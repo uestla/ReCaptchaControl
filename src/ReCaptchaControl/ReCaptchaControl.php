@@ -3,7 +3,7 @@
 /**
  * This file is part of the ReCaptchaControl package
  *
- * Copyright (c) 2013 Petr Kessler (http://kesspess.1991.cz)
+ * Copyright (c) 2015 Petr Kessler (http://kesspess.1991.cz)
  *
  * @license  MIT
  * @link     https://github.com/uestla/ReCaptchaControl
@@ -24,19 +24,19 @@ use Nette\Utils\Html;
 class ReCaptchaControl extends Forms\Controls\BaseControl
 {
 
-	/** @var ReCaptcha\ReCaptcha */
-	protected $reCaptcha;
+	/** @var ReCaptcha */
+	private $reCaptcha;
 
 	/** @var Http\Request */
-	protected $httpRequest;
+	private $httpRequest;
 
 
 	/**
-	 * @param  ReCaptcha\ReCaptcha $reCaptcha
+	 * @param  ReCaptcha $reCaptcha
 	 * @param  Http\Request $httpRequest
 	 * @param  string $caption
 	 */
-	function __construct(ReCaptcha\ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
+	function __construct(ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
 	{
 		parent::__construct($caption);
 
@@ -49,7 +49,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	function getControl()
 	{
 		$this->setOption('rendered', TRUE);
-		return $this->reCaptcha->getHtml();
+		return $this->getReCaptcha()->getHtml();
 	}
 
 
@@ -59,8 +59,8 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	 */
 	static function validateValid(Forms\IControl $control)
 	{
-		$httpRequest = $control->httpRequest;
-		return $control->reCaptcha->validate($httpRequest->remoteAddress, $httpRequest->post)->isValid();
+		$httpRequest = $control->getHttpRequest();
+		return $control->getReCaptcha()->validate($httpRequest->getRemoteAddress(), $httpRequest->getPost());
 	}
 
 
@@ -71,7 +71,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
-	/** @return ReCaptcha\ReCaptcha */
+	/** @return ReCaptcha */
 	function getReCaptcha()
 	{
 		return $this->reCaptcha;
@@ -80,11 +80,11 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 	/**
 	 * @param  Http\Request $httpRequest
-	 * @param  ReCaptcha\ReCaptcha $reCaptcha
+	 * @param  ReCaptcha $reCaptcha
 	 * @param  string
 	 * @return void
 	 */
-	static function register(Http\Request $httpRequest, ReCaptcha\ReCaptcha $reCaptcha, $method = 'addRecaptcha')
+	static function register(Http\Request $httpRequest, ReCaptcha $reCaptcha, $method = 'addRecaptcha')
 	{
 		Forms\Container::extensionMethod($method, function ($container, $name, $label = NULL) use ($httpRequest, $reCaptcha) {
 			return $container[$name] = new ReCaptchaControl($reCaptcha, $httpRequest, $label);

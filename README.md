@@ -7,20 +7,25 @@ Forum: http://forum.nette.org/cs/11914-recaptcha-pro-nette-forms
 Usage
 -----
 
-**bootstrap.php**
-```php
-ReCaptchaControl\ReCaptchaExtension::register($configurator);
-```
-
-
 **config.neon**
 
 ```
-recaptcha:
-	publicKey: '<your_public_key>'
-	privateKey: '<your_private_key>'
+extensions:
+	reCaptcha: ReCaptchaControl\ReCaptchaExtension
+
+reCaptcha:
+	siteKey: '<your_site_key>'
+	secretKey: '<your_secret_key>'
 	methodName: 'addRecaptcha' # optional
-	secured: false # defaults - change to true if you use https
+```
+
+
+**Template**
+
+It is necessary to put this javascript before the end of your `<head />` tag:
+
+```html
+<script src="https://www.google.com/recaptcha/api.js"></script>
 ```
 
 
@@ -31,4 +36,4 @@ $form->addReCaptcha('captcha')
 		->addRule(Form::VALID, 'Incorrect text code.');
 ```
 
-It's that simple !
+And that's it!
