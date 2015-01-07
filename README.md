@@ -1,7 +1,15 @@
 reCAPTCHA for Nette Framework
 =============================
 
-Forum: http://forum.nette.org/cs/11914-recaptcha-pro-nette-forms
+Forum (CZE): http://forum.nette.org/cs/21770-nova-recaptcha-pro-formulare
+
+
+Installation
+------------
+
+```
+composer require "uestla/recaptcha-control" 2.*
+```
 
 
 Usage
