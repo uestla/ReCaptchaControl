@@ -1,10 +1,11 @@
-// load https://www.google.com/recaptcha/api.js?onload=g_OnReCaptchaLoad&render=explicit
+// load https://www.google.com/recaptcha/api.js?render=explicit
 
-function g_OnReCaptchaLoad() {
+$(function () {
 	$('.g-recaptcha').each(function () {
 		var el = $(this);
 		grecaptcha.render(el[0], {
 			sitekey: el.attr('data-sitekey')
 		});
 	});
-}
+});
+
