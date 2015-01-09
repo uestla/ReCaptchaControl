@@ -42,6 +42,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 		$this->reCaptcha = $reCaptcha;
 		$this->httpRequest = $httpRequest;
+		$this->control = $reCaptcha->getHtml();
 	}
 
 
@@ -49,7 +50,9 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	function getControl()
 	{
 		$this->setOption('rendered', TRUE);
-		return $this->getReCaptcha()->getHtml();
+		$control = clone $this->control;
+		$control->id = $this->getHtmlId();
+		return $control;
 	}
 
 
