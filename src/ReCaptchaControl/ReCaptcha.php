@@ -61,7 +61,7 @@ class ReCaptcha
 	function validate($remoteIP, array $post)
 	{
 		if (!isset($post[self::RESPONSE_KEY])) {
-			FALSE;
+			return FALSE;
 		}
 
 		$ch = curl_init();
