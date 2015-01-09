@@ -1,7 +1,8 @@
 reCAPTCHA for Nette Framework
 =============================
 
-Forum (CZE): http://forum.nette.org/cs/21770-nova-recaptcha-pro-formulare
+* Official documentation: https://developers.google.com/recaptcha/
+* Forum (CZE): http://forum.nette.org/cs/21770-nova-recaptcha-pro-formulare
 
 
 Installation
@@ -28,36 +29,33 @@ reCaptcha:
 ```
 
 
-**Template**
+**Form**
 
-It is necessary to load the reCAPTCHA API file. I would highly recommend you to load it with `onload` parameter
-since you may want to have more than just one reCAPTCHA on your page (in multiple forms). For more info please
-see [official documentation](https://developers.google.com/recaptcha/docs/display#config).
-
-```html
-<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&amp;render=explicit"></script>
+```php
+$form->addReCaptcha('captcha')
+		->addRule($form::VALID, 'Incorrect text code.');
 ```
 
-Now it is perfectly simple to render all reCAPTCHA's in a single loop:
+
+**Template**
+
+Load the API script:
+
+```html
+<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+```
+
+Render reCAPTCHA(s) after page has loaded
 
 ```javascript
-// this example uses jQuery
-function onRecaptchaLoad() {
+$(function () {
 	$('.g-recaptcha').each(function () {
 		var el = $(this);
 		grecaptcha.render(el[0], {
 			sitekey: el.attr('data-sitekey')
 		});
 	});
-}
-```
-
-
-**Form**
-
-```php
-$form->addReCaptcha('captcha')
-		->addRule(Form::VALID, 'Incorrect text code.');
+});
 ```
 
 And that's it!
