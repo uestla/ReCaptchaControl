@@ -39,23 +39,9 @@ $form->addReCaptcha('captcha')
 
 **Template**
 
-Load the API script:
-
-```html
-<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
-```
-
-Render reCAPTCHA(s) after page has loaded
-
-```javascript
-$(function () {
-	$('.g-recaptcha').each(function () {
-		var el = $(this);
-		grecaptcha.render(el[0], {
-			sitekey: el.attr('data-sitekey')
-		});
-	});
-});
-```
+The most robust way to render reCAPTCHA is to do it by hand. Take a look
+at [recaptcha.js](client-side/recaptcha.js) where this is done using jQuery.
+So if you are using jQuery on your site, you can load this script after
+you've loaded jQuery.
 
 And that's it!
