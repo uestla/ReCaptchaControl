@@ -1,24 +1,26 @@
-// load this after you've loaded jQuery
+;(function (window) {
 
-;(function (window, $) {
-
-	// register callback
+	var document = window.document;
 	var callback = 'g_ReCaptchaOnLoad';
 
 	window[callback] = function () {
-		$('.g-recaptcha').each(function () {
-			var el = $(this);
-			grecaptcha.render(el[0], {
-				sitekey: el.attr('data-sitekey')
+		[].forEach.call(document.querySelectorAll('.g-recaptcha'), function (recaptcha) {
+			if (recaptcha.children.length) {
+				return ;
+			}
+
+			grecaptcha.render(recaptcha, {
+				sitekey: recaptcha.getAttribute('data-sitekey')
 			});
 		});
 	};
 
-	// load reCAPTCHA api.js
-	$('script:first').before($('<script>', {
-		type: 'text/javascript',
-		async: true,
-		src: 'https://www.google.com/recaptcha/api.js?onload=' + callback + '&render=explicit'
-	}));
+	var script = document.createElement('script');
+	script.async = true;
+	script.type = 'text/javascript';
+	script.src = 'https://www.google.com/recaptcha/api.js?onload=' + callback + '&render=explicit';
 
-})(window, window.jQuery);
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(script, s);
+
+})(window);

@@ -40,8 +40,7 @@ $form->addReCaptcha('captcha')
 **Template**
 
 The most robust way to render reCAPTCHA is to do it by hand. Take a look
-at [recaptcha.js](client-side/recaptcha.js) where this is done using jQuery.
-So if you are using jQuery on your site, you can load this script after
-you've loaded jQuery.
+at [recaptcha.js](client-side/recaptcha.js) where this is done using native
+javascript DOM manipulation supported by all modern browsers.
 
 And that's it!
