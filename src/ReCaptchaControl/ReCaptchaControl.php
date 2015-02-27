@@ -31,6 +31,9 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	private $httpRequest;
 
 
+	const VALID = 'ReCaptchaControl\ReCaptchaControl::validateValid';
+
+
 	/**
 	 * @param  ReCaptcha $reCaptcha
 	 * @param  Http\Request $httpRequest

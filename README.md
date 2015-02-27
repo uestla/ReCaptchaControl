@@ -33,7 +33,7 @@ reCaptcha:
 
 ```php
 $form->addReCaptcha('captcha')
-		->addRule($form::VALID, 'Incorrect text code.');
+		->addRule(ReCaptchaControl\ReCaptchaControl::VALID, 'Incorrect text code.');
 ```
 
 
