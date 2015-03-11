@@ -72,7 +72,6 @@ class ReCaptcha
 				'response' => $post[self::RESPONSE_KEY],
 			)),
 			CURLOPT_RETURNTRANSFER => TRUE,
-			CURLOPT_FOLLOWLOCATION => TRUE,
 			CURLOPT_SSL_VERIFYHOST => FALSE,
 			CURLOPT_SSL_VERIFYPEER => FALSE,
 		));
