@@ -10,6 +10,7 @@
 		"issues": "https://github.com/uestla/ReCaptchaControl/issues"
 	},
 	"require": {
+		"ext-curl": "*",
 		"php": ">=5.3.0",
 		"nette/di": "2.*",
 		"nette/http": "2.*",
