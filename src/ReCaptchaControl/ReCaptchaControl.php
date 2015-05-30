@@ -43,6 +43,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	{
 		parent::__construct($caption);
 
+		$this->setOmitted();
 		$this->reCaptcha = $reCaptcha;
 		$this->httpRequest = $httpRequest;
 		$this->control = $reCaptcha->getHtml();
