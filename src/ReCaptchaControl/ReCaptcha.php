@@ -37,7 +37,7 @@ class ReCaptcha
 	 * @param  string $siteKey
 	 * @param  string $secretKey
 	 */
-	function __construct($siteKey, $secretKey)
+	public function __construct($siteKey, $secretKey)
 	{
 		$this->siteKey = $siteKey;
 		$this->secretKey = $secretKey;
@@ -45,7 +45,7 @@ class ReCaptcha
 
 
 	/** @return Utils\Html */
-	function getHtml()
+	public function getHtml()
 	{
 		return Utils\Html::el('div')
 				->class('g-recaptcha')
@@ -58,7 +58,7 @@ class ReCaptcha
 	 * @param  array $post
 	 * @return bool
 	 */
-	function validate($remoteIP, array $post)
+	public function validate($remoteIP, array $post)
 	{
 		if (!isset($post[self::RESPONSE_KEY])) {
 			return FALSE;

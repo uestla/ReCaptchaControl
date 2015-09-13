@@ -39,7 +39,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	 * @param  Http\Request $httpRequest
 	 * @param  string $caption
 	 */
-	function __construct(ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
+	public function __construct(ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
 	{
 		parent::__construct($caption);
 
@@ -51,7 +51,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 
 	/** @return Html */
-	function getControl()
+	public function getControl()
 	{
 		$this->setOption('rendered', TRUE);
 		$control = clone $this->control;
@@ -64,7 +64,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	 * @param  Forms\IControl $control
 	 * @return bool
 	 */
-	static function validateValid(Forms\IControl $control)
+	public static function validateValid(Forms\IControl $control)
 	{
 		$httpRequest = $control->getHttpRequest();
 		return $control->getReCaptcha()->validate($httpRequest->getRemoteAddress(), $httpRequest->getPost());
@@ -72,14 +72,14 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 
 	/** @return Http\Request */
-	function getHttpRequest()
+	public function getHttpRequest()
 	{
 		return $this->httpRequest;
 	}
 
 
 	/** @return ReCaptcha */
-	function getReCaptcha()
+	public function getReCaptcha()
 	{
 		return $this->reCaptcha;
 	}
@@ -91,7 +91,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	 * @param  string
 	 * @return void
 	 */
-	static function register(Http\Request $httpRequest, ReCaptcha $reCaptcha, $method = 'addRecaptcha')
+	public static function register(Http\Request $httpRequest, ReCaptcha $reCaptcha, $method = 'addRecaptcha')
 	{
 		Forms\Container::extensionMethod($method, function ($container, $name, $label = NULL) use ($httpRequest, $reCaptcha) {
 			return $container[$name] = new ReCaptchaControl($reCaptcha, $httpRequest, $label);
