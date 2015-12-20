@@ -70,7 +70,7 @@ class ReCaptcha
 				'remoteip' => $remoteIP,
 				'secret' => $this->secretKey,
 				'response' => $post[self::RESPONSE_KEY],
-			)),
+			), '', '&'),
 			CURLOPT_RETURNTRANSFER => TRUE,
 			CURLOPT_SSL_VERIFYHOST => FALSE,
 			CURLOPT_SSL_VERIFYPEER => FALSE,
