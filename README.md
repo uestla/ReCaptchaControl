@@ -9,7 +9,7 @@ Installation
 ------------
 
 ```
-composer require "uestla/recaptcha-control" 2.*
+composer require "uestla/recaptcha-control" 3.*
 ```
 
 
