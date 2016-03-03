@@ -31,15 +31,13 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	private $httpRequest;
 
 
-	const VALID = 'ReCaptchaControl\ReCaptchaControl::validateValid';
-
-
 	/**
 	 * @param  ReCaptcha $reCaptcha
 	 * @param  Http\Request $httpRequest
 	 * @param  string $caption
+	 * @param  string $message
 	 */
-	public function __construct(ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL)
+	public function __construct(ReCaptcha $reCaptcha, Http\Request $httpRequest, $caption = NULL, $message = NULL)
 	{
 		parent::__construct($caption);
 
@@ -47,6 +45,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 		$this->reCaptcha = $reCaptcha;
 		$this->httpRequest = $httpRequest;
 		$this->control = $reCaptcha->getHtml();
+		$this->addRule(__CLASS__ . '::validateValid', $message);
 	}
 
 
@@ -88,13 +87,13 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	/**
 	 * @param  Http\Request $httpRequest
 	 * @param  ReCaptcha $reCaptcha
-	 * @param  string
+	 * @param  string $method
 	 * @return void
 	 */
 	public static function register(Http\Request $httpRequest, ReCaptcha $reCaptcha, $method = 'addRecaptcha')
 	{
-		Forms\Container::extensionMethod($method, function ($container, $name, $label = NULL) use ($httpRequest, $reCaptcha) {
-			return $container[$name] = new ReCaptchaControl($reCaptcha, $httpRequest, $label);
+		Forms\Container::extensionMethod($method, function ($container, $name, $label = NULL, $message = NULL) use ($httpRequest, $reCaptcha) {
+			return $container[$name] = new ReCaptchaControl($reCaptcha, $httpRequest, $label, $message);
 		});
 	}
 
