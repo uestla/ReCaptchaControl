@@ -1,3 +1,12 @@
+/**
+ * This file is part of the ReCaptchaControl package
+ *
+ * Copyright (c) 2016 Petr Kessler (http://kesspess.1991.cz)
+ *
+ * @license  MIT
+ * @link     https://github.com/uestla/ReCaptchaControl
+ */
+
 ;(function (window) {
 
 	var document = window.document;
