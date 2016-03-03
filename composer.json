@@ -2,7 +2,7 @@
 {
 	"name": "uestla/recaptcha-control",
 	"type": "library",
-	"description": "ReCaptcha control for Nette Framework forms",
+	"description": "reCAPTCHA control for Nette Framework forms",
 	"keywords": ["nette", "forms", "recaptcha"],
 	"homepage": "https://github.com/uestla/ReCaptchaControl",
 	"license": "MIT",
