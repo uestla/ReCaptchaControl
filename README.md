@@ -32,7 +32,7 @@ reCaptcha:
 **Form**
 
 ```php
-$form->addReCaptcha('captcha', NULL, 'Incorrect text code.');
+$form->addReCaptcha('captcha', NULL, "Please prove you're not a robot.");
 ```
 
 
