@@ -56,17 +56,4 @@ class ReCaptchaExtension extends Nette\DI\CompilerExtension
 				array($this->prefix('recaptcha'), $config['methodName']));
 	}
 
-
-	/**
-	 * @param  Nette\Configurator $configurator
-	 * @param  string $prefix
-	 * @return void
-	 */
-	public static function register(Nette\Configurator $configurator, $prefix = 'recaptcha')
-	{
-		$configurator->onCompile[] = function ($configurator, $compiler) use ($prefix) {
-			$compiler->addExtension($prefix, new ReCaptchaExtension);
-		};
-	}
-
 }
