@@ -43,9 +43,10 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 		$this->setOmitted();
 		$this->reCaptcha = $reCaptcha;
+		$this->enableAutoOptionalMode();
 		$this->httpRequest = $httpRequest;
 		$this->control = $reCaptcha->getHtml();
-		$this->addRule(__CLASS__ . '::validateValid', $message);
+		$this->setRequired($message)->addRule(__CLASS__ . '::validateValid', $message);
 	}
 
 
@@ -59,11 +60,18 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	}
 
 
+	/** @return bool */
+	public function isFilled()
+	{
+		return TRUE;
+	}
+
+
 	/**
-	 * @param  Forms\IControl $control
+	 * @param  ReCaptchaControl $control
 	 * @return bool
 	 */
-	public static function validateValid(Forms\IControl $control)
+	public static function validateValid(ReCaptchaControl $control)
 	{
 		$httpRequest = $control->getHttpRequest();
 		return $control->getReCaptcha()->validate($httpRequest->getRemoteAddress(), $httpRequest->getPost());
