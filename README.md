@@ -9,7 +9,13 @@ Installation
 ------------
 
 ```
-composer require "uestla/recaptcha-control" 3.*
+composer require uestla/recaptcha-control
+```
+
+For frontend javascript that activates reCAPTCHA(s), use
+
+```
+bower install
 ```
 
 
@@ -39,7 +45,7 @@ $form->addReCaptcha('captcha', NULL, "Please prove you're not a robot.");
 **Template**
 
 The most robust way to render reCAPTCHA is to do it by hand. Take a look
-at [recaptcha.js](client-side/recaptcha.js) where this is done using native
+at [recaptcha.js](assets/recaptcha.js) where this is done using native
 javascript DOM manipulation supported by all modern browsers.
 
 And that's it!

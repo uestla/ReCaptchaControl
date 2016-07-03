@@ -1,0 +1,23 @@
+
+{
+  "name": "uestla-recaptcha-control",
+  "homepage": "https://github.com/uestla/ReCaptchaControl",
+  "authors": [
+    "Petr Kessler (http://kesspess.1991.cz)"
+  ],
+  "description": "assets for reCAPTCHA control for Nette Framework forms",
+  "main": "assets/recaptcha.js",
+  "keywords": [
+    "recaptcha",
+    "captcha",
+    "nette",
+    "forms"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "/src",
+    "**/.*",
+    "composer.*",
+    "tests"
+  ]
+}
