@@ -32,6 +32,10 @@ class ReCaptcha
 	const RESPONSE_KEY = 'g-recaptcha-response';
 	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
+	/**
+	 * @var bool[]
+	 */
+	private $valid = [];
 
 	/**
 	 * @param  string $siteKey
@@ -63,6 +67,9 @@ class ReCaptcha
 		if (!isset($post[self::RESPONSE_KEY])) {
 			return FALSE;
 		}
+		if (array_key_exists($post[self::RESPONSE_KEY], $this->valid)) {
+			return $this->valid[$post[self::RESPONSE_KEY]];
+		}
 
 		$ch = curl_init();
 		curl_setopt_array($ch, array(
@@ -83,7 +90,7 @@ class ReCaptcha
 
 		try {
 			$json = Utils\Json::decode($response);
-			return isset($json->success) && $json->success;
+			return $this->valid[$post[self::RESPONSE_KEY]] = isset($json->success) && $json->success;
 
 		} catch (Utils\JsonException $e) {
 			return FALSE;
