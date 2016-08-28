@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<title>ReCAPTCHA test</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/readable/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+	<h1 class="page-header">reCAPTCHA for Nette\Forms</h1>
+
+	<form n:name="$form">
+		<ul n:if="$form->errors">
+			<li class="alert alert-danger" n:foreach="$form->errors as $error">
+				{$error}
+			</li>
+		</ul>
+
+		<div n:name="recaptcha"></div>
+
+		<button n:name="send" class="btn btn-block btn-lg btn-success">Send form</button>
+	</form>
+</div>
+
+<script type="text/javascript" src="../../vendor/nette/forms/src/assets/netteForms.min.js"></script>
+<script type="text/javascript" src="../../assets/recaptcha.js"></script>
+</body>
+</html>
