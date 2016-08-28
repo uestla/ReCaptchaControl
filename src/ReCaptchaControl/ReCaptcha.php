@@ -28,14 +28,14 @@ class ReCaptcha
 	/** @var string */
 	private $secretKey;
 
-
-	const RESPONSE_KEY = 'g-recaptcha-response';
-	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
-
 	/**
 	 * @var bool[]
 	 */
-	private $valid = [];
+	private $validateCache = [];
+
+
+	const RESPONSE_KEY = 'g-recaptcha-response';
+	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
 	/**
 	 * @param  string $siteKey
@@ -67,8 +67,8 @@ class ReCaptcha
 		if (!isset($post[self::RESPONSE_KEY])) {
 			return FALSE;
 		}
-		if (array_key_exists($post[self::RESPONSE_KEY], $this->valid)) {
-			return $this->valid[$post[self::RESPONSE_KEY]];
+		if (!isset($this->validateCache[$post[self::RESPONSE_KEY]])) {
+			return $this->validateCache[$post[self::RESPONSE_KEY]];
 		}
 
 		$ch = curl_init();
@@ -90,7 +90,9 @@ class ReCaptcha
 
 		try {
 			$json = Utils\Json::decode($response);
-			return $this->valid[$post[self::RESPONSE_KEY]] = isset($json->success) && $json->success;
+			$this->validateCache[$post[self::RESPONSE_KEY]] = isset($json->success) && $json->success;
+
+			return $this->validateCache[$post[self::RESPONSE_KEY]];
 
 		} catch (Utils\JsonException $e) {
 			return FALSE;
