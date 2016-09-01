@@ -30,6 +30,9 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	/** @var Http\Request */
 	private $httpRequest;
 
+	/** @var bool */
+	private $initialized = FALSE;
+
 
 	/**
 	 * @param  ReCaptcha $reCaptcha
@@ -43,10 +46,21 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 
 		$this->setOmitted();
 		$this->reCaptcha = $reCaptcha;
-		$this->enableAutoOptionalMode();
 		$this->httpRequest = $httpRequest;
 		$this->control = $reCaptcha->getHtml();
 		$this->setRequired($message)->addRule(__CLASS__ . '::validateValid', $message);
+		$this->initialized = TRUE;
+	}
+
+
+	/** @inheritdoc */
+	public function addRule($validator, $message = NULL, $arg = NULL)
+	{
+		if ($this->initialized && ($validator === [__CLASS__, 'validateValid'] || $validator === __CLASS__ . '::validateValid')) {
+			trigger_error('addRule() is deprecated at RecaptchaControl. Please remove it to prevent multiple validation.', E_USER_DEPRECATED);
+		}
+
+		return parent::addRule($validator, $message, $arg);
 	}
 
 
