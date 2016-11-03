@@ -57,7 +57,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 	public function addRule($validator, $message = NULL, $arg = NULL)
 	{
 		if ($this->initialized && ($validator === [__CLASS__, 'validateValid'] || $validator === __CLASS__ . '::validateValid')) {
-			trigger_error('addRule() is deprecated at RecaptchaControl. Please remove it to prevent multiple validation.', E_USER_DEPRECATED);
+			trigger_error('ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.', E_USER_DEPRECATED);
 		}
 
 		return parent::addRule($validator, $message, $arg);
