@@ -48,7 +48,7 @@ class ReCaptchaControl extends Forms\Controls\BaseControl
 		$this->reCaptcha = $reCaptcha;
 		$this->httpRequest = $httpRequest;
 		$this->control = $reCaptcha->getHtml();
-		$this->setRequired($message)->addRule(__CLASS__ . '::validateValid', $message);
+		$this->setRequired(TRUE)->addRule(__CLASS__ . '::validateValid', $message);
 		$this->initialized = TRUE;
 	}
 
