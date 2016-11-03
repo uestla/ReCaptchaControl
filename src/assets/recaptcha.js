@@ -14,7 +14,7 @@
 
 	window[callback] = function () {
 		[].forEach.call(document.querySelectorAll('.g-recaptcha'), function (recaptcha) {
-			if (recaptcha.children.length) {
+			if (recaptcha.children.length) { // already processed -> skip
 				return ;
 			}
 
