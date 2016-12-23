@@ -18,6 +18,8 @@ For frontend javascript that activates reCAPTCHA(s), use
 bower install
 ```
 
+Or just load the javascript file in [src/assets/recaptcha.js](src/assets/recaptcha.js) by hand. It also loads Google's recaptcha library itself.
+
 
 Usage
 -----
@@ -44,8 +46,16 @@ $form->addReCaptcha('captcha', NULL, "Please prove you're not a robot.");
 
 **Template**
 
-The most robust way to render reCAPTCHA is to do it by hand. Take a look
-at [recaptcha.js](assets/recaptcha.js) where this is done using native
-javascript DOM manipulation supported by all modern browsers.
+To render the reCAPTCHA element manually in Latte simply use
+
+```latte
+<form ...>
+	<div n:name="captcha"></div>
+
+	{* or *}
+
+	{input captcha}
+</form>
+```
 
 And that's it!
