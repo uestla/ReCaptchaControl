@@ -43,6 +43,8 @@ reCaptcha:
 $form->addReCaptcha('captcha', NULL, "Please prove you're not a robot.");
 ```
 
+NOTE: The validation rule is set automatically so no `addRule()` is required here.
+
 
 **Template**
 
