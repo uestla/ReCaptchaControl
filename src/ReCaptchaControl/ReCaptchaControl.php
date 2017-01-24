@@ -3,9 +3,8 @@
 /**
  * This file is part of the ReCaptchaControl package
  *
- * Copyright (c) 2016 Petr Kessler (http://kesspess.1991.cz)
- *
  * @license  MIT
+ * @author   Petr Kessler (https://kesspess.cz)
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
