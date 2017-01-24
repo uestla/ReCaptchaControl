@@ -28,7 +28,7 @@ Usage
 
 ```
 extensions:
-	reCaptcha: ReCaptchaControl\ReCaptchaExtension
+	reCaptcha: ReCaptchaControl\DI\Extension
 
 reCaptcha:
 	siteKey: '<your_site_key>'

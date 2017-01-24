@@ -10,14 +10,15 @@
 
 namespace ReCaptchaControl;
 
+use Nette\Http;
 use Nette\Utils;
 
 
-class ReCaptcha
+class Validator
 {
 
-	/** @var string */
-	private $siteKey;
+	/** @var Http\Request */
+	private $httpRequest;
 
 	/** @var string */
 	private $secretKey;
@@ -28,45 +29,35 @@ class ReCaptcha
 
 
 	/**
-	 * @param  string $siteKey
+	 * @param  Http\Request $httpRequest
 	 * @param  string $secretKey
 	 */
-	public function __construct($siteKey, $secretKey)
+	public function __construct(Http\Request $httpRequest, $secretKey)
 	{
-		$this->siteKey = $siteKey;
 		$this->secretKey = $secretKey;
+		$this->httpRequest = $httpRequest;
 	}
 
 
-	/** @return Utils\Html */
-	public function getHtml()
+	/** @return bool */
+	public function validate()
 	{
-		return Utils\Html::el('div')
-				->class('g-recaptcha')
-				->data('sitekey', $this->siteKey);
-	}
+		$post = $this->httpRequest->getPost();
 
-
-	/**
-	 * @param  string $remoteIP
-	 * @param  array $post
-	 * @return bool
-	 */
-	public function validate($remoteIP, array $post)
-	{
 		if (!isset($post[self::RESPONSE_KEY])) {
 			return FALSE;
 		}
 
 		$ch = curl_init();
-		curl_setopt_array($ch, array(
-			CURLOPT_URL => self::VERIFICATION_URL . '?' . http_build_query(array(
-				'remoteip' => $remoteIP,
+		curl_setopt_array($ch, [
+			CURLOPT_URL => self::VERIFICATION_URL . '?' . http_build_query([
 				'secret' => $this->secretKey,
 				'response' => $post[self::RESPONSE_KEY],
-			), '', '&'),
+				'remoteip' => $this->httpRequest->getRemoteAddress(),
+			], '', '&'),
+
 			CURLOPT_RETURNTRANSFER => TRUE,
-		));
+		]);
 
 		$response = curl_exec($ch);
 		if (curl_errno($ch) !== 0) {

@@ -1,5 +1,6 @@
 <?php
 
-require_once __DIR__ . '/ReCaptchaControl/ReCaptcha.php';
-require_once __DIR__ . '/ReCaptchaControl/ReCaptchaControl.php';
-require_once __DIR__ . '/ReCaptchaControl/ReCaptchaExtension.php';
+require_once __DIR__ . '/ReCaptchaControl/Validator.php';
+require_once __DIR__ . '/ReCaptchaControl/Renderer.php';
+require_once __DIR__ . '/ReCaptchaControl/Control.php';
+require_once __DIR__ . '/ReCaptchaControl/DI/Extension.php';

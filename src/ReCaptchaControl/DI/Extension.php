@@ -8,9 +8,13 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
-namespace ReCaptchaControl;
+namespace ReCaptchaControl\DI;
 
 use Nette;
+use ReCaptchaControl\Control;
+use ReCaptchaControl\Renderer;
+use ReCaptchaControl\Validator;
+use ReCaptchaControl\Configuration;
 
 
 /**
@@ -18,13 +22,13 @@ use Nette;
  *
  * @author vojtech-dobes (https://github.com/vojtech-dobes)
  */
-class ReCaptchaExtension extends Nette\DI\CompilerExtension
+class Extension extends Nette\DI\CompilerExtension
 {
 
 	/** @var string[] */
-	protected $defaults = array(
+	protected $defaults = [
 		'methodName' => 'addReCaptcha',
-	);
+	];
 
 	/** @var string */
 	protected $prefix;
@@ -36,8 +40,11 @@ class ReCaptchaExtension extends Nette\DI\CompilerExtension
 		$container = $this->getContainerBuilder();
 		$config = $this->getConfig($this->defaults);
 
-		$container->addDefinition($this->prefix('recaptcha'))
-				->setClass('ReCaptchaControl\ReCaptcha', array($config['siteKey'], $config['secretKey']));
+		$container->addDefinition($this->prefix('validator'))
+				->setClass(Validator::class, ['@' . Nette\Http\IRequest::class, $config['secretKey']]);
+
+		$container->addDefinition($this->prefix('renderer'))
+				->setClass(Renderer::class, [$config['siteKey']]);
 	}
 
 
@@ -50,9 +57,8 @@ class ReCaptchaExtension extends Nette\DI\CompilerExtension
 		$initialize = $class->getMethod('initialize');
 		$config = $this->getConfig($this->defaults);
 
-		$initialize->addBody('$context = $this;');
-		$initialize->addBody('ReCaptchaControl\ReCaptchaControl::register($context->getByType(\'Nette\Http\IRequest\'), $context->getService(?), ?);',
-				array($this->prefix('recaptcha'), $config['methodName']));
+		$initialize->addBody(Control::class . '::register($this->getService(?), $this->getService(?), ?);',
+				[$this->prefix('validator'), $this->prefix('renderer'), $config['methodName']]);
 	}
 
 }
