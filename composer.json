@@ -19,7 +19,10 @@
 		"nette/php-generator": "^2.4"
 	},
 	"require-dev": {
-		"tracy/tracy": "^2.4"
+		"tracy/tracy": "^2.4",
+		"latte/latte": "^2.4",
+		"nette/tester": "^1.7",
+		"nette/bootstrap": "^2.4"
 	},
 	"autoload": {
 		"psr-0": {
