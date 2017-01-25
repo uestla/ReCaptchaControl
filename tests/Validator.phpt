@@ -27,4 +27,9 @@ test(function () {
 
 	}, E_USER_DEPRECATED);
 
+	Assert::error(function () use ($control) {
+		$control->addRule(Control::class . '::validateValid');
+
+	}, E_USER_DEPRECATED);
+
 });
