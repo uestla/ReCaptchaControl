@@ -18,7 +18,7 @@ For frontend javascript that activates reCAPTCHA(s), use
 bower install
 ```
 
-Or just load the javascript file in [src/assets/recaptcha.js](src/assets/recaptcha.js) by hand. It also loads Google's recaptcha library itself.
+Or just load the javascript file in [assets/recaptcha.js](assets/recaptcha.js) by hand. It also loads Google's recaptcha library itself.
 
 
 Usage

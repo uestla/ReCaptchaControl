@@ -6,7 +6,7 @@
     "Petr Kessler (http://kesspess.1991.cz)"
   ],
   "description": "assets for reCAPTCHA control for Nette Framework forms",
-  "main": "src/assets/recaptcha.js",
+  "main": "assets/recaptcha.js",
   "keywords": [
     "recaptcha",
     "captcha",
