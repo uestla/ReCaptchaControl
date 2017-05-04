@@ -28,6 +28,7 @@ class Extension extends Nette\DI\CompilerExtension
 	/** @var string[] */
 	protected $defaults = [
 		'methodName' => 'addReCaptcha',
+		'useCurlSSL' => true
 	];
 
 	/** @var string */
