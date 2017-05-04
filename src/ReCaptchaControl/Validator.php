@@ -36,7 +36,7 @@ class Validator
 	 * @param  Http\Request $httpRequest
 	 * @param  string $secretKey
 	 */
-	public function __construct(Http\Request $httpRequest, $secretKey, $useCurlSSL = DEFAULT_USE_CURL_SSL)
+	public function __construct(Http\Request $httpRequest, $secretKey, $useCurlSSL = self::DEFAULT_USE_CURL_SSL)
 	{
 		$this->secretKey = $secretKey;
 		$this->httpRequest = $httpRequest;

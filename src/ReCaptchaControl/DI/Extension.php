@@ -42,7 +42,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$config = $this->getConfig($this->defaults);
 
 		$container->addDefinition($this->prefix('validator'))
-				->setClass(Validator::class, ['@' . Nette\Http\IRequest::class, $config['secretKey']]);
+				->setClass(Validator::class, ['@' . Nette\Http\IRequest::class, $config['secretKey'], $config['useCurlSSL']]);
 
 		$container->addDefinition($this->prefix('renderer'))
 				->setClass(Renderer::class, [$config['siteKey']]);
