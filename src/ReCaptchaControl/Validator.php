@@ -23,19 +23,24 @@ class Validator
 	/** @var string */
 	private $secretKey;
 
+	/** @var boolean */
+	private $useCurlSSL;
+
 
 	const RESPONSE_KEY = 'g-recaptcha-response';
 	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
+	const DEFAULT_USE_CURL_SSL = true;
 
 
 	/**
 	 * @param  Http\Request $httpRequest
 	 * @param  string $secretKey
 	 */
-	public function __construct(Http\Request $httpRequest, $secretKey)
+	public function __construct(Http\Request $httpRequest, $secretKey, $useCurlSSL = DEFAULT_USE_CURL_SSL)
 	{
 		$this->secretKey = $secretKey;
 		$this->httpRequest = $httpRequest;
+		$this->useCurlSSL = $useCurlSSL;
 	}
 
 
@@ -49,18 +54,30 @@ class Validator
 		}
 
 		$ch = curl_init();
-		curl_setopt_array($ch, [
+
+		$options = [
 			CURLOPT_URL => self::VERIFICATION_URL . '?' . http_build_query([
-				'secret' => $this->secretKey,
-				'response' => $post[self::RESPONSE_KEY],
-				'remoteip' => $this->httpRequest->getRemoteAddress(),
-			], '', '&'),
+					'secret' => $this->secretKey,
+					'response' => $post[self::RESPONSE_KEY],
+					'remoteip' => $this->httpRequest->getRemoteAddress(),
+				], '', '&'),
 
 			CURLOPT_RETURNTRANSFER => TRUE,
-		]);
+		];
+
+		if(!$this->useCurlSSL) {
+			$options[CURLOPT_SSL_VERIFYPEER] = false;
+		}
+
+		curl_setopt_array($ch, $options);
 
 		$response = curl_exec($ch);
 		if (curl_errno($ch) !== 0) {
+
+			if (curl_errno($ch) === 60) {
+				throw new \Exception('Curl error: ' . curl_error($ch));
+			}
+
 			return FALSE;
 		}
 

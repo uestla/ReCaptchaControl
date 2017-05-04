@@ -11,7 +11,7 @@ Debugger::enable(Debugger::DEVELOPMENT, FALSE);
 
 
 $renderer = new ReCaptchaControl\Renderer(RECAPTCHA_SITEKEY);
-$validator = new ReCaptchaControl\Validator((new Nette\Http\RequestFactory())->createHttpRequest(), RECAPTCHA_SECRETKEY);
+$validator = new ReCaptchaControl\Validator((new Nette\Http\RequestFactory())->createHttpRequest(), RECAPTCHA_SECRETKEY, \ReCaptchaControl\Validator::DEFAULT_USE_CURL_SSL);
 
 ReCaptchaControl\Control::register($validator, $renderer);
 
