@@ -34,6 +34,7 @@ reCaptcha:
 	siteKey: '<your_site_key>'
 	secretKey: '<your_secret_key>'
 	methodName: 'addReCaptcha' # optional
+	useCurlSSL: true
 ```
 
 
