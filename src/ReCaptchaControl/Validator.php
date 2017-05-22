@@ -26,6 +26,9 @@ class Validator
 	/** @var boolean */
 	private $useCurlSSL;
 
+	/** @var string */
+	private $curlPemFile = null;
+
 
 	const RESPONSE_KEY = 'g-recaptcha-response';
 	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
@@ -43,6 +46,13 @@ class Validator
 		$this->useCurlSSL = $useCurlSSL;
 	}
 
+	/**
+	 * @param string $file
+	 */
+	public function setPemFile(string $file)
+	{
+		$this->curlPemFile = $file;
+	}
 
 	/** @return bool */
 	public function validate()
@@ -64,6 +74,10 @@ class Validator
 
 			CURLOPT_RETURNTRANSFER => TRUE,
 		];
+
+		if($this->curlPemFile) {
+			$options[CURLOPT_CAINFO] = $this->curlPemFile;
+		}
 
 		if(!$this->useCurlSSL) {
 			$options[CURLOPT_SSL_VERIFYPEER] = false;

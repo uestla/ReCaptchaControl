@@ -43,6 +43,7 @@ reCaptcha:
 ```php
 $form->addReCaptcha('captcha', NULL, "Please prove you're not a robot.");
 ```
+Set PEM file of certificate now on Control call method `setPemFile($file);`
 
 NOTE: The validation rule is set automatically so no `addRule()` is required here.
 
@@ -62,3 +63,7 @@ To render the reCAPTCHA element manually in Latte simply use
 ```
 
 And that's it!
+
+@author   Petr Kessler (https://kesspess.cz)
+
+@editor   Lukáš Vlček (xnukes@gmail.com)

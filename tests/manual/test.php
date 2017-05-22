@@ -17,7 +17,8 @@ ReCaptchaControl\Control::register($validator, $renderer);
 
 
 $form = new Form;
-$form->addReCaptcha('recaptcha', NULL, "Please prove you're not a robot.");
+$form->addReCaptcha('recaptcha', NULL, "Please prove you're not a robot.")
+	/*->setPemFile(__DIR__ . '/cert.pem')*/;
 $form->addSubmit('send');
 
 $form->onSuccess[] = function () {

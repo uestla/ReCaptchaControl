@@ -26,7 +26,6 @@ class Control extends Forms\Controls\BaseControl
 	/** @var bool */
 	private $initialized = FALSE;
 
-
 	/**
 	 * @param  Validator $validator
 	 * @param  Renderer $renderer
@@ -50,13 +49,25 @@ class Control extends Forms\Controls\BaseControl
 	public function addRule($validator, $message = NULL, $arg = NULL)
 	{
 		if ($this->initialized
-				&& ($validator === [__CLASS__, 'validateValid'] || $validator === __CLASS__ . '::validateValid')) {
+			&& ($validator === [__CLASS__, 'validateValid'] || $validator === __CLASS__ . '::validateValid')
+		) {
 			trigger_error('ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.', E_USER_DEPRECATED);
 		}
 
 		return parent::addRule($validator, $message, $arg);
 	}
 
+	/**
+	 * @param string $file
+	 */
+	public function setPemFile(string $file)
+	{
+		if (file_exists($file)) {
+			$this->validator->setPemFile($file);
+		} else {
+			trigger_error('ReCaptchaControl set of invalid PEM file.', E_USER_DEPRECATED);
+		}
+	}
 
 	/** @return Html */
 	public function getControl()
