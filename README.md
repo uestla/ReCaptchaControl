@@ -66,4 +66,4 @@ And that's it!
 
 @author   Petr Kessler (https://kesspess.cz)
 
-@editor   Lukáš Vlček (xnukes@gmail.com)
+@editor   Lukáš Vlček (http://vlceklukas.cz)
