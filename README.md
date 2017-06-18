@@ -12,14 +12,11 @@ Installation
 composer require uestla/recaptcha-control
 ```
 
-For frontend javascript that activates reCAPTCHA(s), use
+Don't forget to include the official JavaScript library:
 
+```html
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 ```
-bower install
-```
-
-Or just load the javascript file in [assets/recaptcha.js](assets/recaptcha.js) by hand. It also loads Google's recaptcha library itself.
-
 
 Usage
 -----
