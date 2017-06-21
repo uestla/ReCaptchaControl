@@ -40,6 +40,7 @@ class Control extends Forms\Controls\BaseControl
 		$this->setOmitted();
 		$this->renderer = $renderer;
 		$this->validator = $validator;
+		$this->control = $renderer->getHtml();
 		$this->setRequired(TRUE)->addRule(__CLASS__ . '::validateValid', $message);
 
 		$this->initialized = TRUE;
@@ -62,9 +63,10 @@ class Control extends Forms\Controls\BaseControl
 	public function getControl()
 	{
 		$this->setOption('rendered', TRUE);
-		$control = $this->renderer->getHtml();
-		$control->id = $this->getHtmlId();
-		return $control;
+		$el = clone $this->control;
+		return $el->addAttributes([
+			'id' => $this->getHtmlId(),
+		]);
 	}
 
 
