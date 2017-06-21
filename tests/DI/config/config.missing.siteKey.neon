@@ -1,0 +1,5 @@
+extensions:
+	recaptcha: ReCaptchaControl\DI\Extension
+
+recaptcha:
+	secretKey: RECAPTCHA_SECRETKEY

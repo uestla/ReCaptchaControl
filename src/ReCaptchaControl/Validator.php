@@ -12,6 +12,7 @@ namespace ReCaptchaControl;
 
 use Nette\Utils;
 use ReCaptchaControl\Http\IRequestDataProvider;
+use ReCaptchaControl\Http\Requester\IRequester;
 
 
 class Validator
@@ -19,6 +20,9 @@ class Validator
 
 	/** @var IRequestDataProvider */
 	private $requestDataProvider;
+
+	/** @var IRequester */
+	private $requester;
 
 	/** @var string */
 	private $secretKey;
@@ -29,11 +33,13 @@ class Validator
 
 	/**
 	 * @param  IRequestDataProvider $requestDataProvider
+	 * @param  IRequester $requester
 	 * @param  string $secretKey
 	 */
-	public function __construct(IRequestDataProvider $requestDataProvider, $secretKey)
+	public function __construct(IRequestDataProvider $requestDataProvider, IRequester $requester, $secretKey)
 	{
 		$this->secretKey = $secretKey;
+		$this->requester = $requester;
 		$this->requestDataProvider = $requestDataProvider;
 	}
 
@@ -46,20 +52,14 @@ class Validator
 		if (!$response) {
 			return FALSE;
 		}
+		$result = $this->requester->post(self::VERIFICATION_URL . '?' . http_build_query([
+			'secret' => $this->secretKey,
+			'response' => $response,
+			'remoteip' => $this->requestDataProvider->getRemoteIP(),
 
-		$ch = curl_init();
-		curl_setopt_array($ch, [
-			CURLOPT_URL => self::VERIFICATION_URL . '?' . http_build_query([
-				'secret' => $this->secretKey,
-				'response' => $response,
-				'remoteip' => $this->requestDataProvider->getRemoteIP(),
-			], '', '&'),
+		], '', '&'));
 
-			CURLOPT_RETURNTRANSFER => TRUE,
-		]);
-
-		$result = curl_exec($ch);
-		if (curl_errno($ch) !== 0) {
+		if (!$result) {
 			return FALSE;
 		}
 

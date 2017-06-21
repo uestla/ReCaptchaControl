@@ -7,17 +7,20 @@ use ReCaptchaControl\Renderer;
 use Nette\Http\RequestFactory;
 use ReCaptchaControl\Validator;
 use ReCaptchaControl\Http\RequestDataProvider;
+use ReCaptchaControl\Http\Requester\CurlRequester;
 
 require_once __DIR__ . '/bootstrap.php';
 
 
-test(function () {
+// multiple addRule() error
+(function () {
 
-	// multiple validation
 	$httpRequest = (new RequestFactory())->createHttpRequest();
 	$requestDataProvider = new RequestDataProvider($httpRequest);
 
-	$validator = new Validator($requestDataProvider, RECAPTCHA_SECRETKEY);
+	$requester = new CurlRequester;
+
+	$validator = new Validator($requestDataProvider, $requester, RECAPTCHA_SECRETKEY);
 	$renderer = new Renderer(RECAPTCHA_SITEKEY);
 
 	Control::register($validator, $renderer);
@@ -35,4 +38,4 @@ test(function () {
 
 	}, E_USER_DEPRECATED);
 
-});
+})();

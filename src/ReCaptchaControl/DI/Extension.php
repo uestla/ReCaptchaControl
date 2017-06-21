@@ -20,6 +20,7 @@ use Nette\PhpGenerator\ClassType;
 use ReCaptchaControl\Configuration;
 use ReCaptchaControl\Http\RequestDataProvider;
 use ReCaptchaControl\Http\IRequestDataProvider;
+use ReCaptchaControl\Http\Requester\CurlRequester;
 
 
 /**
@@ -35,6 +36,7 @@ class Extension extends CompilerExtension
 		'siteKey' => NULL,
 		'secretKey' => NULL,
 		'methodName' => 'addReCaptcha',
+		'requester' => CurlRequester::class,
 	];
 
 	/** @var string */
@@ -50,12 +52,23 @@ class Extension extends CompilerExtension
 		Validators::assertField($config, 'siteKey', 'string');
 		Validators::assertField($config, 'secretKey', 'string');
 		Validators::assertField($config, 'methodName', 'string');
+		Validators::assertField($config, 'requester', 'string');
 
 		$builder->addDefinition($this->prefix('requestDataProvider'))
 				->setClass(RequestDataProvider::class);
 
+		if (Strings::startsWith($config['requester'], '@')) {
+			$requesterService = $config['requester'];
+
+		} else {
+			$builder->addDefinition($this->prefix('requester'))
+				->setClass($config['requester']);
+
+			$requesterService = '@' . $this->prefix('requester');
+		}
+
 		$builder->addDefinition($this->prefix('validator'))
-				->setClass(Validator::class, ['@' . IRequestDataProvider::class, $config['secretKey']]);
+				->setClass(Validator::class, ['@' . IRequestDataProvider::class, $requesterService, $config['secretKey']]);
 
 		$builder->addDefinition($this->prefix('renderer'))
 				->setClass(Renderer::class, [$config['siteKey']]);
