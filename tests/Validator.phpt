@@ -6,6 +6,7 @@ use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
 use Nette\Http\RequestFactory;
 use ReCaptchaControl\Validator;
+use ReCaptchaControl\Http\RequestDataProvider;
 
 require_once __DIR__ . '/bootstrap.php';
 
@@ -14,7 +15,9 @@ test(function () {
 
 	// multiple validation
 	$httpRequest = (new RequestFactory())->createHttpRequest();
-	$validator = new Validator($httpRequest, RECAPTCHA_SECRETKEY);
+	$requestDataProvider = new RequestDataProvider($httpRequest);
+
+	$validator = new Validator($requestDataProvider, RECAPTCHA_SECRETKEY);
 	$renderer = new Renderer(RECAPTCHA_SITEKEY);
 
 	Control::register($validator, $renderer);
