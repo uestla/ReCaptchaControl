@@ -3,6 +3,7 @@
 Adds the reCAPTCHA control to Nette Framework forms.
 
 * [Official documentation](https://developers.google.com/recaptcha/)
+* [Online demo](https://kesspess.cz/recaptcha/)
 * [Nette forum thread (CZE)](http://forum.nette.org/cs/21770-nova-recaptcha-pro-formulare)
 
 
@@ -13,6 +14,7 @@ Adds the reCAPTCHA control to Nette Framework forms.
 3. [Usage](#usage)
 4. [Requester](#requester)
 5. [AJAX](#ajax)
+6. [Testing](#testing)
 
 
 ### Installation
@@ -204,3 +206,21 @@ bower install
 ```
 
 IMPORTANT: The [recaptcha.ajax.js](assets/recaptcha.ajax.js) script loads the official JavaScript library because it needs to render the reCATPCHAs [explicitely](https://developers.google.com/recaptcha/docs/display#explicit_render). So please be careful not to loaded by yourself as well.
+
+
+### Testing
+
+You may have noticed the [tests/manual](tests/manual) directory. Its content is actualy live at https://kesspess.cz/recaptcha.
+
+To get it to work on your local machine, do following:
+
+1. copy `app/config/config.local.neon.template` to `app/config/config.local.neon`
+2. fill reCAPTCHA keys properly in `app/config/config.local.neon`
+3. run `composer install`
+4. run `bower install`
+
+After that you should be able to run it via your local web server.
+
+The form definitions are in [TestPresenter](tests/manual/app/presenters/TestPresenter.php).
+
+Individual example templates are located in [presenters/templates](tests/manual/app/presenters/templates) directory.
