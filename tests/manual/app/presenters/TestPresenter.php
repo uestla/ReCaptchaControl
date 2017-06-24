@@ -82,6 +82,26 @@ class TestPresenter extends Presenter
 	}
 
 
+	// === AJAX FORMS ========================================
+
+	protected function createComponentInvisibleForm()
+	{
+		$form = new Form;
+
+		$form->addText('email', 'Your e-mail')
+			->setHtmlType('email')
+			->setEmptyValue('@')
+			->setRequired(TRUE)
+			->addRule(Form::EMAIL, 'Please provide a valid e-mail address.');
+
+		$form->addReCaptcha('recaptcha', NULL, "Please prove you're not a robot.");
+		$form->addSubmit('send', 'Submit form');
+
+		$form->onSuccess[] = [$this, 'onFormSuccess'];
+		return $form;
+	}
+
+
 	// === FORM FACTORY ========================================
 
 	private static function factoryForm()
