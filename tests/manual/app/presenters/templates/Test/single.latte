@@ -1,0 +1,15 @@
+{define title}Single{/define}
+
+
+{block content}
+
+	{import '../@form.latte'}
+
+	{include bootstrap-form, form => basicForm}
+
+{/block}
+
+
+{block scripts}
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{/block}

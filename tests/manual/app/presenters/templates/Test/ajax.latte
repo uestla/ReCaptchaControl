@@ -1,0 +1,26 @@
+{define title}AJAX{/define}
+
+
+{block content}
+
+	<div n:snippet="form">
+		{import '../@form.latte'}
+		{include bootstrap-form, form => ajaxForm, formClass => 'ajax'}
+	</div>
+
+{/block}
+
+
+{block scripts}
+	<script src="{$basePath}/assets/vendor/nette-forms/src/assets/netteForms.min.js"></script>
+	<script src="{$basePath}/assets/vendor/nette.ajax.js/nette.ajax.js"></script>
+	<script src="{$basePath}/assets/vendor/uestla-recaptcha-control/assets/recaptcha.ajax.js"></script>
+
+	<script>
+		(function (window, $) {
+			$(function () {
+				$.nette.init();
+			});
+		})(window, window.jQuery);
+	</script>
+{/block}

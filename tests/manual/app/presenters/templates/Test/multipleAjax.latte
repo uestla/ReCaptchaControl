@@ -1,0 +1,41 @@
+{define title}Multiple + AJAX{/define}
+
+
+{block content}
+
+	<div class="row">
+		<div class="col-lg-6">
+			<fieldset n:snippet="form-first">
+				{import '../@form.latte'}
+				<legend>Form #1</legend>
+
+				{include bootstrap-form, form => multiAjaxForm-first, formClass => 'ajax'}
+			</fieldset>
+		</div>
+
+		<div class="col-lg-6">
+			<fieldset n:snippet="form-second">
+				{import '../@form.latte'}
+				<legend>Form #2</legend>
+
+				{include bootstrap-form, form => multiAjaxForm-second, formClass => 'ajax'}
+			</fieldset>
+		</div>
+	</div>
+
+{/block}
+
+
+{block scripts}
+	<script src="{$basePath}/assets/vendor/nette-forms/src/assets/netteForms.min.js"></script>
+	<script src="{$basePath}/assets/vendor/nette.ajax.js/nette.ajax.js"></script>
+	<script src="{$basePath}/assets/vendor/uestla-recaptcha-control/assets/recaptcha.ajax.js"></script>
+
+	<script>
+		(function (window, $) {
+			$(function () {
+				$.nette.init();
+			});
+		})(window, window.jQuery);
+	</script>
+{/block}

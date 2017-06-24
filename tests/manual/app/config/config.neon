@@ -1,0 +1,24 @@
+extensions:
+	recaptcha: ReCaptchaControl\DI\Extension
+
+
+parameters:
+
+
+application:
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+	save_path: %tempDir%/sessions
+
+
+services:
+	router: App\RouterFactory::createRouter
+
+
+recaptcha:
+	siteKey: %recaptcha.siteKey%
+	secretKey: %recaptcha.secretKey%

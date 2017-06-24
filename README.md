@@ -204,4 +204,3 @@ bower install
 ```
 
 IMPORTANT: The [recaptcha.ajax.js](assets/recaptcha.ajax.js) script loads the official JavaScript library because it needs to render the reCATPCHAs [explicitely](https://developers.google.com/recaptcha/docs/display#explicit_render). So please be careful not to loaded by yourself as well.
-

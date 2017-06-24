@@ -17,6 +17,7 @@
 		"nette/php-generator": "^2.4"
 	},
 	"require-dev": {
+		"php": ">= 7.0",
 		"tracy/tracy": "^2.4",
 		"latte/latte": "^2.4",
 		"nette/tester": "^1.7",

@@ -1,0 +1,31 @@
+{define bootstrap-form}
+	{default $formClass = ''}
+	<form n:name=$form n:class="form-horizontal, $formClass">
+		<ul class="error" n:if="$form->ownErrors">
+			<li n:foreach="$form->ownErrors as $error">{$error}</li>
+		</ul>
+
+		<div n:foreach="$form->controls as $name => $input"
+				n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
+				n:class="form-group, $input->required ? required, $input->error ? has-error">
+
+			<div class="col-sm-4 control-label">{label $input}</div>
+
+			<div class="col-sm-8">
+				{if $input->getOption(type) in [text, select, textarea]}
+					{input $input class => form-control}
+				{elseif $input->getOption(type) === button}
+					{input $input class => "btn btn-default"}
+				{elseif $input->getOption(type) === checkbox}
+					<div class="checkbox">{input $input}</div>
+				{elseif $input->getOption(type) === radio}
+					<div class="radio">{input $input}</div>
+				{else}
+					{input $input}
+				{/if}
+
+				<span class="help-block" n:ifcontent>{$input->error ?: $input->getOption(description)}</span>
+			</div>
+		</div>
+	</form>
+{/define}
