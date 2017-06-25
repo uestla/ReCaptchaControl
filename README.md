@@ -14,7 +14,8 @@ Adds the reCAPTCHA control to Nette Framework forms.
 3. [Usage](#usage)
 4. [Requester](#requester)
 5. [AJAX](#ajax)
-6. [Testing](#testing)
+6. [Invisible reCAPTCHA](#invisible-recaptcha)
+7. [Testing](#testing)
 
 
 ### Installation
@@ -206,6 +207,11 @@ bower install
 ```
 
 IMPORTANT: The [recaptcha.ajax.js](assets/recaptcha.ajax.js) script loads the official JavaScript library because it needs to render the reCATPCHAs [explicitely](https://developers.google.com/recaptcha/docs/display#explicit_render). So please be careful not to loaded by yourself as well.
+
+
+### Invisible reCAPTCHA
+
+You can also use this library for [Invisible reCAPTCHA](https://developers.google.com/recaptcha/docs/invisible). The backend part stays the same so it only needs proper configuration in the frontend. To see it in action you can visit https://kesspess.cz/recaptcha/invisible and the code in [tests](tests/manual/app/presenters/templates/Test/invisible.latte). 
 
 
 ### Testing
