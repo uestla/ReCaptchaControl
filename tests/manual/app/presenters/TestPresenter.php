@@ -86,6 +86,35 @@ class TestPresenter extends Presenter
 
 	protected function createComponentInvisibleForm()
 	{
+		$form = static::factoryInvisibleForm();
+		$form->onSuccess[] = [$this, 'onFormSuccess'];
+		return $form;
+	}
+
+
+	protected function createComponentMultiInvisibleForm()
+	{
+		return new Multiplier(function ($name) {
+			$form = static::factoryInvisibleForm();
+			$form->onSuccess[] = [$this, 'onFormSuccess'];
+			return $form;
+		});
+	}
+
+
+	// === FORM FACTORY ========================================
+
+	private static function factoryForm()
+	{
+		$form = new Form;
+		$form->addReCaptcha('recaptcha', 'reCAPTCHA for you', "Please prove you're not a robot.");
+		$form->addSubmit('send', 'Submit form');
+		return $form;
+	}
+
+
+	private static function factoryInvisibleForm()
+	{
 		$form = new Form;
 
 		$form->addText('email', 'Your e-mail')
@@ -97,18 +126,6 @@ class TestPresenter extends Presenter
 		$form->addReCaptcha('recaptcha', NULL, "Please prove you're not a robot.");
 		$form->addSubmit('send', 'Submit form');
 
-		$form->onSuccess[] = [$this, 'onFormSuccess'];
-		return $form;
-	}
-
-
-	// === FORM FACTORY ========================================
-
-	private static function factoryForm()
-	{
-		$form = new Form;
-		$form->addReCaptcha('recaptcha', 'reCAPTCHA for you', "Please prove you're not a robot.");
-		$form->addSubmit('send', 'Submit form');
 		return $form;
 	}
 
