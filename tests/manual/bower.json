@@ -1,0 +1,9 @@
+{
+	"name": "ReCaptchaControl tests",
+	"dependencies": {
+		"nette-forms": "^2.4.4",
+		"jquery": "*",
+		"nette.ajax.js": "*",
+		"uestla-recaptcha-control": "master"
+	}
+}

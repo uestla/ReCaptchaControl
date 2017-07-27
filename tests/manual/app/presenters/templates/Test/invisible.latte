@@ -1,0 +1,64 @@
+{define title}Invisible reCAPTCHA{/define}
+
+
+{block styles}
+	<style>.form-group:nth-of-type(2) { display: none; }</style>
+{/block}
+
+
+{block content}
+
+	{import '../@form.latte'}
+
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			{include bootstrap-form, form => invisibleForm}
+		</div>
+	</div>
+
+{/block}
+
+
+{block scripts}
+	<script src="{$basePath}/assets/vendor/nette-forms/src/assets/netteForms.min.js"></script>
+
+	<script>
+		(function (window, $) {
+
+			// map of <htmlID>: <widget/client ID>
+			var clientIDs = {};
+
+			window['g_onRecaptchaLoad'] = function () {
+				$('.g-recaptcha').each(function () {
+					var el = $(this);
+
+					clientIDs[this.id] = grecaptcha.render(this, {
+						size: 'invisible',
+						badge: 'inline',
+						callback: function (token) {
+							el.closest('form').off('submit.recaptcha').trigger('submit');
+						}
+
+					}, true);
+				});
+
+				$(function () {
+					$('form').on('submit.recaptcha', function (event) {
+						event.preventDefault();
+
+						var form = $(this);
+						if (Nette.validateForm(this, true)) {
+							// execute only reCAPTCHAs in submitted form
+							$('.g-recaptcha', form).each(function () {
+								grecaptcha.execute(clientIDs[this.id]);
+							});
+						}
+					});
+				});
+			};
+
+		})(window, window.jQuery);
+	</script>
+
+	<script src="https://www.google.com/recaptcha/api.js?onload=g_onRecaptchaLoad&amp;render=explicit" async defer></script>
+{/block}

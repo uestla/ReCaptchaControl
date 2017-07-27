@@ -10,93 +10,61 @@
 
 namespace ReCaptchaControl;
 
-use Nette\Http;
 use Nette\Utils;
+use ReCaptchaControl\Http\IRequestDataProvider;
+use ReCaptchaControl\Http\Requester\IRequester;
 
 
 class Validator
 {
 
-	/** @var Http\Request */
-	private $httpRequest;
+	/** @var IRequestDataProvider */
+	private $requestDataProvider;
+
+	/** @var IRequester */
+	private $requester;
 
 	/** @var string */
 	private $secretKey;
 
-	/** @var boolean */
-	private $useCurlSSL;
 
-	/** @var string */
-	private $curlPemFile = null;
-
-
-	const RESPONSE_KEY = 'g-recaptcha-response';
 	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
-	const DEFAULT_USE_CURL_SSL = true;
 
 
 	/**
-	 * @param  Http\Request $httpRequest
+	 * @param  IRequestDataProvider $requestDataProvider
+	 * @param  IRequester $requester
 	 * @param  string $secretKey
 	 */
-	public function __construct(Http\Request $httpRequest, $secretKey, $useCurlSSL = self::DEFAULT_USE_CURL_SSL)
+	public function __construct(IRequestDataProvider $requestDataProvider, IRequester $requester, $secretKey)
 	{
 		$this->secretKey = $secretKey;
-		$this->httpRequest = $httpRequest;
-		$this->useCurlSSL = $useCurlSSL;
+		$this->requester = $requester;
+		$this->requestDataProvider = $requestDataProvider;
 	}
 
-	/**
-	 * @param string $file
-	 */
-	public function setPemFile(string $file)
-	{
-		$this->curlPemFile = $file;
-	}
 
 	/** @return bool */
 	public function validate()
 	{
-		$post = $this->httpRequest->getPost();
+		$response = $this->requestDataProvider->getResponseValue();
 
-		if (!isset($post[self::RESPONSE_KEY])) {
+		if (!$response) {
 			return FALSE;
 		}
+		$result = $this->requester->post(self::VERIFICATION_URL . '?' . http_build_query([
+			'secret' => $this->secretKey,
+			'response' => $response,
+			'remoteip' => $this->requestDataProvider->getRemoteIP(),
 
-		$ch = curl_init();
+		], '', '&'));
 
-		$options = [
-			CURLOPT_URL => self::VERIFICATION_URL . '?' . http_build_query([
-					'secret' => $this->secretKey,
-					'response' => $post[self::RESPONSE_KEY],
-					'remoteip' => $this->httpRequest->getRemoteAddress(),
-				], '', '&'),
-
-			CURLOPT_RETURNTRANSFER => TRUE,
-		];
-
-		if($this->curlPemFile) {
-			$options[CURLOPT_CAINFO] = $this->curlPemFile;
-		}
-
-		if(!$this->useCurlSSL) {
-			$options[CURLOPT_SSL_VERIFYPEER] = false;
-		}
-
-		curl_setopt_array($ch, $options);
-
-		$response = curl_exec($ch);
-		if (curl_errno($ch) !== 0) {
-
-			if (curl_errno($ch) === 60) {
-				throw new \Exception('Curl error: ' . curl_error($ch));
-			}
-
+		if (!$result) {
 			return FALSE;
 		}
 
 		try {
-			$json = Utils\Json::decode($response);
+			$json = Utils\Json::decode($result);
 			return isset($json->success) && $json->success;
 
 		} catch (Utils\JsonException $e) {

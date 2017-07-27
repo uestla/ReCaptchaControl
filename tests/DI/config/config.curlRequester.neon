@@ -1,0 +1,15 @@
+extensions:
+	recaptcha: ReCaptchaControl\DI\Extension
+
+recaptcha:
+	siteKey: RECAPTCHA_SITEKEY
+	secretKey: RECAPTCHA_SECRETKEY
+	requester: @curlRequester
+
+services:
+	curlRequester:
+		class: ReCaptchaControl\Http\Requester\CurlRequester
+		arguments:
+			-
+				CURLOPT_CAINFO: ''
+				CURLOPT_CAPATH: ''

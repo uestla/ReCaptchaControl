@@ -10,11 +10,17 @@
 
 namespace ReCaptchaControl\DI;
 
-use Nette;
+use Nette\Utils\Strings;
+use Nette\Utils\Validators;
 use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
+use Nette\DI\CompilerExtension;
 use ReCaptchaControl\Validator;
+use Nette\PhpGenerator\ClassType;
 use ReCaptchaControl\Configuration;
+use ReCaptchaControl\Http\RequestDataProvider;
+use ReCaptchaControl\Http\IRequestDataProvider;
+use ReCaptchaControl\Http\Requester\CurlRequester;
 
 
 /**
@@ -22,13 +28,15 @@ use ReCaptchaControl\Configuration;
  *
  * @author vojtech-dobes (https://github.com/vojtech-dobes)
  */
-class Extension extends Nette\DI\CompilerExtension
+class Extension extends CompilerExtension
 {
 
 	/** @var string[] */
 	protected $defaults = [
+		'siteKey' => NULL,
+		'secretKey' => NULL,
 		'methodName' => 'addReCaptcha',
-		'useCurlSSL' => Validator::DEFAULT_USE_CURL_SSL
+		'requester' => CurlRequester::class,
 	];
 
 	/** @var string */
@@ -38,25 +46,43 @@ class Extension extends Nette\DI\CompilerExtension
 	/** @return void */
 	public function loadConfiguration()
 	{
-		$container = $this->getContainerBuilder();
-		$config = $this->getConfig($this->defaults);
+		$config = $this->validateConfig($this->defaults);
+		$builder = $this->getContainerBuilder();
 
-		$container->addDefinition($this->prefix('validator'))
-				->setClass(Validator::class, ['@' . Nette\Http\IRequest::class, $config['secretKey'], $config['useCurlSSL']]);
+		Validators::assertField($config, 'siteKey', 'string');
+		Validators::assertField($config, 'secretKey', 'string');
+		Validators::assertField($config, 'methodName', 'string');
+		Validators::assertField($config, 'requester', 'string');
 
-		$container->addDefinition($this->prefix('renderer'))
+		$builder->addDefinition($this->prefix('requestDataProvider'))
+				->setClass(RequestDataProvider::class);
+
+		if (Strings::startsWith($config['requester'], '@')) {
+			$requesterService = $config['requester'];
+
+		} else {
+			$builder->addDefinition($this->prefix('requester'))
+				->setClass($config['requester']);
+
+			$requesterService = '@' . $this->prefix('requester');
+		}
+
+		$builder->addDefinition($this->prefix('validator'))
+				->setClass(Validator::class, ['@' . IRequestDataProvider::class, $requesterService, $config['secretKey']]);
+
+		$builder->addDefinition($this->prefix('renderer'))
 				->setClass(Renderer::class, [$config['siteKey']]);
 	}
 
 
 	/**
-	 * @param  Nette\PhpGenerator\ClassType $class
+	 * @param  ClassType $class
 	 * @return void
 	 */
-	public function afterCompile(Nette\PhpGenerator\ClassType $class)
+	public function afterCompile(ClassType $class)
 	{
 		$initialize = $class->getMethod('initialize');
-		$config = $this->getConfig($this->defaults);
+		$config = $this->validateConfig($this->defaults);
 
 		$initialize->addBody(Control::class . '::register($this->getService(?), $this->getService(?), ?);',
 				[$this->prefix('validator'), $this->prefix('renderer'), $config['methodName']]);

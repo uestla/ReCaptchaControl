@@ -1,0 +1,5 @@
+parameters:
+
+	recaptcha:
+		siteKey: __SITE_KEY__
+		secretKey: __SECRET_KEY__

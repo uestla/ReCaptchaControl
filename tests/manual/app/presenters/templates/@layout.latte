@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+		<title>{ifset title}{include title |stripHtml|trim} | {/ifset}ReCaptchaControl demo</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>h1 { margin-top: 0; }</style>
+		{block styles /}
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-nav" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<h1>
+						<a n:href="Test:single" class="navbar-brand">ReCaptchaControl</a>
+					</h1>
+				</div>
+
+				<div class="collapse navbar-collapse" id="main-navbar-nav">
+					<ul class="nav navbar-nav">
+						<li n:class="$presenter->isLinkCurrent('Test:single') ? active">
+							<a n:href="Test:single">Single</a>
+						</li>
+
+						<li n:class="$presenter->isLinkCurrent('Test:multiple') ? active">
+							<a n:href="Test:multiple">Multiple</a>
+						</li>
+
+						<li n:class="$presenter->isLinkCurrent('Test:ajax') ? active">
+							<a n:href="Test:ajax">AJAX</a>
+						</li>
+
+						<li n:class="$presenter->isLinkCurrent('Test:multipleAjax') ? active">
+							<a n:href="Test:multipleAjax">Multiple + AJAX</a>
+						</li>
+
+						<li n:class="$presenter->isLinkCurrent('Test:invisible') ? active">
+							<a n:href="Test:invisible">Invisible</a>
+						</li>
+
+						<li n:class="$presenter->isLinkCurrent('Test:multipleInvisible') ? active">
+							<a n:href="Test:multipleInvisible">Multiple Invisible</a>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="https://github.com/uestla/ReCaptchaControl">
+								<i class="fa fa-fw fa-github"></i>
+								GitHub
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<p class="text-info text-center">
+				<i class="fa fa-fw fa-info-circle"></i>
+				This is a demo page of <a href="https://github.com/uestla/ReCaptchaControl">reCAPTCHA control</a> for <a href="https://nette.org/">Nette Framework</a>
+			</p>
+
+			<hr>
+
+			<div n:snippet="flashes">
+				<p n:foreach="$flashes as $flash" n:class="alert, 'alert-' . ($flash->type === danger ? error : $flash->type)">{$flash->message}</p>
+			</div>
+
+			{block content /}
+		</div>
+
+		<script src="{$basePath}/assets/vendor/jquery/dist/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{block scripts /}
+
+	</body>
+</html>

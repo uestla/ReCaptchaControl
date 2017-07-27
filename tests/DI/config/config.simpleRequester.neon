@@ -1,0 +1,7 @@
+extensions:
+	recaptcha: ReCaptchaControl\DI\Extension
+
+recaptcha:
+	siteKey: RECAPTCHA_SITEKEY
+	secretKey: RECAPTCHA_SECRETKEY
+	requester: ReCaptchaControl\Http\Requester\SimpleRequester

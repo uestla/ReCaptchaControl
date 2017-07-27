@@ -1,17 +1,17 @@
-
 {
   "name": "uestla-recaptcha-control",
   "homepage": "https://github.com/uestla/ReCaptchaControl",
   "authors": [
-    "Petr Kessler (http://kesspess.1991.cz)"
+    "Petr Kessler (http://kesspess.cz)"
   ],
-  "description": "assets for reCAPTCHA control for Nette Framework forms",
-  "main": "assets/recaptcha.js",
+  "description": "nette.ajax.js extension for using reCAPTCHA with AJAX",
+  "main": "assets/recaptcha.ajax.js",
   "keywords": [
     "recaptcha",
     "captcha",
     "nette",
-    "forms"
+    "forms",
+    "ajax"
   ],
   "license": "MIT",
   "ignore": [
@@ -19,5 +19,12 @@
     "**/.*",
     "composer.*",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "nette.ajax.js": "*",
+    "jquery": "*"
+  },
+  "devDependencies": {
+    "nette-forms": "^2.4.4"
+  }
 }

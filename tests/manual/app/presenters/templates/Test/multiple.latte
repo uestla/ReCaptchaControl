@@ -1,0 +1,41 @@
+{define title}Multiple{/define}
+
+
+{block content}
+
+	{import '../@form.latte'}
+
+	<div class="row">
+		<div class="col-lg-6">
+			<fieldset>
+				<legend>Form #1</legend>
+
+				{include bootstrap-form, form => multiForm-first}
+			</fieldset>
+		</div>
+
+		<div class="col-lg-6">
+			<fieldset>
+				<legend>Form #2</legend>
+
+				{include bootstrap-form, form => multiForm-second}
+			</fieldset>
+		</div>
+	</div>
+
+{/block}
+
+
+{block scripts}
+	<script>
+		function g_OnRecaptchaLoad() {
+			document.querySelectorAll('.g-recaptcha').forEach(function (el) {
+				grecaptcha.render(el, {
+					sitekey: el.getAttribute('data-sitekey')
+				});
+			});
+		}
+	</script>
+
+	<script src="https://www.google.com/recaptcha/api.js?onload=g_OnRecaptchaLoad&amp;render=explicit" async defer></script>
+{/block}
