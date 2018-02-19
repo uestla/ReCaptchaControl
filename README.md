@@ -123,6 +123,7 @@ You can change the default requester by setting the `requester` key in [configur
 			arguments:
 				-
 					CURLOPT_CAINFO: %appDir%/res/cacert.pem
+					CURLOPT_SSL_VERIFYPEER: false # Verify SSL OFF
 					CURLOPT_USERAGENT: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
 	```
 

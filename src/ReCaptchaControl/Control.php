@@ -58,18 +58,6 @@ class Control extends Forms\Controls\BaseControl
 		return parent::addRule($validator, $message, $arg);
 	}
 
-	/**
-	 * @param string $file
-	 */
-	public function setPemFile(string $file)
-	{
-		if (file_exists($file)) {
-			$this->validator->setPemFile($file);
-		} else {
-			trigger_error('ReCaptchaControl set of invalid PEM file.', E_USER_DEPRECATED);
-		}
-	}
-
 	/** @return Html */
 	public function getControl()
 	{
