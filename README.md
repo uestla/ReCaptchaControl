@@ -214,7 +214,19 @@ IMPORTANT: The [recaptcha.ajax.js](assets/recaptcha.ajax.js) script loads the of
 You can also use this library for [Invisible reCAPTCHA](https://developers.google.com/recaptcha/docs/invisible). The backend part stays the same so it only needs proper configuration in the frontend. To see it in action you can visit https://kesspess.cz/recaptcha/invisible and the code in [tests](tests/manual/app/presenters/templates/Test/invisible.latte). 
 
 
-### Testing
+## Tests
+
+### Automated tests
+
+This library uses [Nette Tester](https://tester.nette.org/) for automated testing. For running them yourself you'll need to fill properly your reCAPTCHA keys in `tests/keys.php`.
+
+After that simply run
+
+```
+composer test
+```
+
+### Manual testing
 
 You may have noticed the [tests/manual](tests/manual) directory. Its content is actualy live at https://kesspess.cz/recaptcha.
 
