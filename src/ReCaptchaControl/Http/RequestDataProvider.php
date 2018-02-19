@@ -30,7 +30,7 @@ class RequestDataProvider implements IRequestDataProvider
 	/** @inheritdoc */
 	public function getResponseValue()
 	{
-		return $this->httpRequest->getPost(self::RESPONSE_KEY, NULL);
+		return $this->httpRequest->getPost(self::RESPONSE_KEY, null);
 	}
 
 

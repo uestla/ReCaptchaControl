@@ -38,9 +38,9 @@ class CurlRequester implements IRequester
 
 		curl_setopt_array($ch, [
 			CURLOPT_URL => $url,
-			CURLOPT_POST => TRUE,
+			CURLOPT_POST => true,
 			CURLOPT_POSTFIELDS => $values,
-			CURLOPT_RETURNTRANSFER => TRUE,
+			CURLOPT_RETURNTRANSFER => true,
 
 		] + $this->options);
 
@@ -52,7 +52,7 @@ class CurlRequester implements IRequester
 			return $response;
 		}
 
-		return FALSE; // throw exception?
+		return false; // throw exception?
 	}
 
 

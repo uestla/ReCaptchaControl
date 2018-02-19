@@ -50,8 +50,9 @@ class Validator
 		$response = $this->requestDataProvider->getResponseValue();
 
 		if (!$response) {
-			return FALSE;
+			return false;
 		}
+
 		$result = $this->requester->post(self::VERIFICATION_URL . '?' . http_build_query([
 			'secret' => $this->secretKey,
 			'response' => $response,
@@ -60,7 +61,7 @@ class Validator
 		], '', '&'));
 
 		if (!$result) {
-			return FALSE;
+			return false;
 		}
 
 		try {
@@ -68,7 +69,7 @@ class Validator
 			return isset($json->success) && $json->success;
 
 		} catch (Utils\JsonException $e) {
-			return FALSE;
+			return false;
 		}
 	}
 

@@ -16,10 +16,10 @@ interface IRequestDataProvider
 
 	const RESPONSE_KEY = 'g-recaptcha-response';
 
-	/** @return string|NULL */
+	/** @return string|null */
 	public function getResponseValue();
 
-	/** @return string|NULL */
+	/** @return string|null */
 	public function getRemoteIP();
 
 }

@@ -26,7 +26,7 @@ class SimpleRequester implements IRequester
 			],
 		]);
 
-		return file_get_contents($url, FALSE, $context);
+		return file_get_contents($url, false, $context);
 	}
 
 }

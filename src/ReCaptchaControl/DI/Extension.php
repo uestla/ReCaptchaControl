@@ -33,8 +33,8 @@ class Extension extends CompilerExtension
 
 	/** @var string[] */
 	protected $defaults = [
-		'siteKey' => NULL,
-		'secretKey' => NULL,
+		'siteKey' => null,
+		'secretKey' => null,
 		'methodName' => 'addReCaptcha',
 		'requester' => CurlRequester::class,
 	];

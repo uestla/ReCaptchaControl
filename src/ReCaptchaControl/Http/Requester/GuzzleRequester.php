@@ -36,11 +36,11 @@ class GuzzleRequester implements IRequester
 			]);
 
 			$response = $request->send();
-			return $response->getBody(TRUE);
+			return $response->getBody(true);
 
 		} catch (\Exception $e) {} // convert exception & bubble up?
 
-		return FALSE;
+		return false;
 	}
 
 }

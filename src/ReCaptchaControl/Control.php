@@ -24,7 +24,7 @@ class Control extends Forms\Controls\BaseControl
 	private $renderer;
 
 	/** @var bool */
-	private $initialized = FALSE;
+	private $initialized = false;
 
 
 	/**
@@ -33,7 +33,7 @@ class Control extends Forms\Controls\BaseControl
 	 * @param  string $caption
 	 * @param  string $message
 	 */
-	public function __construct(Validator $validator, Renderer $renderer, $caption = NULL, $message = NULL)
+	public function __construct(Validator $validator, Renderer $renderer, $caption = null, $message = null)
 	{
 		parent::__construct($caption);
 
@@ -41,14 +41,14 @@ class Control extends Forms\Controls\BaseControl
 		$this->renderer = $renderer;
 		$this->validator = $validator;
 		$this->control = $renderer->getHtml();
-		$this->setRequired(TRUE)->addRule(__CLASS__ . '::validateValid', $message);
+		$this->setRequired(true)->addRule(__CLASS__ . '::validateValid', $message);
 
-		$this->initialized = TRUE;
+		$this->initialized = true;
 	}
 
 
 	/** @inheritdoc */
-	public function addRule($validator, $message = NULL, $arg = NULL)
+	public function addRule($validator, $message = null, $arg = null)
 	{
 		if ($this->initialized
 				&& ($validator === [__CLASS__, 'validateValid'] || $validator === __CLASS__ . '::validateValid')) {
@@ -62,7 +62,7 @@ class Control extends Forms\Controls\BaseControl
 	/** @return Html */
 	public function getControl()
 	{
-		$this->setOption('rendered', TRUE);
+		$this->setOption('rendered', true);
 		$el = clone $this->control;
 		return $el->addAttributes([
 			'id' => $this->getHtmlId(),
@@ -73,7 +73,7 @@ class Control extends Forms\Controls\BaseControl
 	/** @return bool */
 	public function isFilled()
 	{
-		return TRUE;
+		return true;
 	}
 
 
@@ -95,7 +95,7 @@ class Control extends Forms\Controls\BaseControl
 	 */
 	public static function register(Validator $validator, Renderer $renderer, $method = 'addRecaptcha')
 	{
-		Forms\Container::extensionMethod($method, function ($container, $name, $label = NULL, $message = NULL) use ($validator, $renderer) {
+		Forms\Container::extensionMethod($method, function ($container, $name, $label = null, $message = null) use ($validator, $renderer) {
 			return $container[$name] = new Control($validator, $renderer, $label, $message);
 		});
 	}

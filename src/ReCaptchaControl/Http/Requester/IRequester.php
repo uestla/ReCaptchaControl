@@ -19,7 +19,7 @@ interface IRequester
 	 *
 	 * @param  string $url
 	 * @param  array $values
-	 * @return string|FALSE
+	 * @return string|false
 	 */
 	public function post($url, array $values = []);
 
