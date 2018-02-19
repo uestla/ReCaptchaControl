@@ -31,5 +31,8 @@
 		"psr-0": {
 			"ReCaptchaControl": "src/"
 		}
+	},
+	"scripts": {
+		"test": "tester tests/ -C"
 	}
 }
