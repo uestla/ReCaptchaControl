@@ -20,7 +20,7 @@
 		"php": ">= 7.0",
 		"tracy/tracy": "^2.4",
 		"latte/latte": "^2.4",
-		"nette/tester": "^1.7",
+		"nette/tester": "^2.0",
 		"nette/bootstrap": "^2.4",
 		"guzzlehttp/guzzle": "^3.8"
 	},
