@@ -49,8 +49,6 @@ class Extension extends CompilerExtension
 		$config = $this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 
-		Validators::assertField($config, 'siteKey', 'string');
-		Validators::assertField($config, 'secretKey', 'string');
 		Validators::assertField($config, 'methodName', 'string');
 		Validators::assertField($config, 'requester', 'string');
 
