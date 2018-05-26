@@ -218,9 +218,7 @@ You can also use this library for [Invisible reCAPTCHA](https://developers.googl
 
 ### Automated tests
 
-This library uses [Nette Tester](https://tester.nette.org/) for automated testing. For running them yourself you'll need to fill properly your reCAPTCHA keys in `tests/keys.php`.
-
-After that simply run
+This library uses [Nette Tester](https://tester.nette.org/) for automated testing. For running them yourself simply run
 
 ```
 composer test

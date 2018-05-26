@@ -20,8 +20,8 @@ require_once __DIR__ . '/bootstrap.php';
 
 	$requester = new CurlRequester;
 
-	$validator = new Validator($requestDataProvider, $requester, RECAPTCHA_SECRETKEY);
-	$renderer = new Renderer(RECAPTCHA_SITEKEY);
+	$validator = new Validator($requestDataProvider, $requester, 'RECAPTCHA_SECRETKEY');
+	$renderer = new Renderer('RECAPTCHA_SITEKEY');
 
 	Control::register($validator, $renderer);
 
