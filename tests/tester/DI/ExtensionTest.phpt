@@ -79,7 +79,7 @@ require_once __DIR__ . '/CustomRequester.php';
 	Assert::type(CustomRequester::class, $requester);
 
 	$response = $requester->post('https://google.com');
-	Assert::true(stripos($response, 'elgooG') !== FALSE);
+	Assert::true(stripos($response, 'elgooG') !== false);
 
 })();
 
@@ -98,7 +98,7 @@ require_once __DIR__ . '/CustomRequester.php';
 
 // === helpers ============================
 
-function createContainer($config = NULL)
+function createContainer($config = null)
 {
 	$configurator = new Nette\Configurator;
 	$configurator->setTempDirectory(__DIR__ . '/temp');
