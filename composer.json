@@ -33,6 +33,6 @@
 		}
 	},
 	"scripts": {
-		"test": "tester tests/ -C"
+		"test": "tester -C tests/tester/"
 	}
 }
