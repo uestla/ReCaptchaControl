@@ -25,7 +25,7 @@
 		"guzzlehttp/guzzle": "^3.8"
 	},
 	"suggest": {
-		"ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester"
+		"ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester\\CurlRequester."
 	},
 	"autoload": {
 		"psr-0": {
