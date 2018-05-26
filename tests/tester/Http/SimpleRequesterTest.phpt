@@ -14,6 +14,6 @@ require_once __DIR__ . '/../bootstrap.php';
 
 	$response = $requester->post('https://google.com');
 	Assert::type('string', $response);
-	Assert::true(stripos($response, 'Google') !== FALSE);
+	Assert::true(stripos($response, 'Google') !== false);
 
 })();

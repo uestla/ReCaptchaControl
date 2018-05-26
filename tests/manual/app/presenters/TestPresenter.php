@@ -120,10 +120,10 @@ class TestPresenter extends Presenter
 		$form->addText('email', 'Your e-mail')
 			->setHtmlType('email')
 			->setEmptyValue('@')
-			->setRequired(TRUE)
+			->setRequired(true)
 			->addRule(Form::EMAIL, 'Please provide a valid e-mail address.');
 
-		$form->addReCaptcha('recaptcha', NULL, "Please prove you're not a robot.");
+		$form->addReCaptcha('recaptcha', null, "Please prove you're not a robot.");
 		$form->addSubmit('send', 'Submit form');
 
 		return $form;
