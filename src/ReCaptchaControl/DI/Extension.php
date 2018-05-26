@@ -55,23 +55,23 @@ class Extension extends CompilerExtension
 		Validators::assertField($config, 'requester', 'string');
 
 		$builder->addDefinition($this->prefix('requestDataProvider'))
-				->setClass(RequestDataProvider::class);
+				->setFactory(RequestDataProvider::class);
 
 		if (Strings::startsWith($config['requester'], '@')) {
 			$requesterService = $config['requester'];
 
 		} else {
 			$builder->addDefinition($this->prefix('requester'))
-				->setClass($config['requester']);
+				->setFactory($config['requester']);
 
 			$requesterService = '@' . $this->prefix('requester');
 		}
 
 		$builder->addDefinition($this->prefix('validator'))
-				->setClass(Validator::class, ['@' . IRequestDataProvider::class, $requesterService, $config['secretKey']]);
+				->setFactory(Validator::class, ['@' . IRequestDataProvider::class, $requesterService, $config['secretKey']]);
 
 		$builder->addDefinition($this->prefix('renderer'))
-				->setClass(Renderer::class, [$config['siteKey']]);
+				->setFactory(Renderer::class, [$config['siteKey']]);
 	}
 
 
