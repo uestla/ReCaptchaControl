@@ -1,0 +1,12 @@
+extensions:
+	recaptcha: ReCaptchaControl\DI\Extension
+
+recaptcha:
+	siteKey: @factory::factorySiteKey()
+	secretKey: @factory::factorySecretKey()
+	requester: @myRequester
+
+services:
+	factory: MyFactory
+
+	myRequester: @factory::createRequester
