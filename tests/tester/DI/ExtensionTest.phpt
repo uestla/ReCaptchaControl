@@ -1,7 +1,6 @@
 <?php
 
 use Tester\Assert;
-use Tester\Helpers;
 use Nette\Forms\Form;
 use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
@@ -13,7 +12,6 @@ use ReCaptchaControl\Http\Requester\GuzzleRequester;
 use ReCaptchaControl\Http\Requester\SimpleRequester;
 
 require_once __DIR__ . '/../bootstrap.php';
-require_once __DIR__ . '/CustomRequester.php';
 
 
 // missing fields
@@ -95,22 +93,3 @@ require_once __DIR__ . '/CustomRequester.php';
 	Assert::type(Control::class, $form['recaptcha']);
 
 })();
-
-
-// === helpers ============================
-
-function createContainer($config = null)
-{
-	$configurator = new Nette\Configurator;
-
-	$tempDir = __DIR__ . '/temp/' . getmypid();
-
-	Helpers::purge($tempDir);
-	$configurator->setTempDirectory($tempDir);
-
-	if ($config) {
-		$configurator->addConfig($config);
-	}
-
-	return $configurator->createContainer();
-}
