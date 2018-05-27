@@ -31,7 +31,7 @@ use ReCaptchaControl\Http\Requester\CurlRequester;
 class Extension extends CompilerExtension
 {
 
-	/** @var string[] */
+	/** @var array */
 	protected $defaults = [
 		'siteKey' => null,
 		'secretKey' => null,
