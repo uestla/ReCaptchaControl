@@ -14,9 +14,10 @@ use ReCaptchaControl\Http\Requester\SimpleRequester;
 require_once __DIR__ . '/../bootstrap.php';
 
 
-// missing fields
+// invalid fields
 (function () {
 
+	// missing keys
 	Assert::exception(function () {
 		createContainer(__DIR__ . '/config/config.missing.siteKey.neon');
 	}, AssertionException::class, "The item 'siteKey' in array expects to be string, NULL given.");
@@ -24,6 +25,15 @@ require_once __DIR__ . '/../bootstrap.php';
 	Assert::exception(function () {
 		createContainer(__DIR__ . '/config/config.missing.secretKey.neon');
 	}, AssertionException::class, "The item 'secretKey' in array expects to be string, NULL given.");
+
+	// invalid types
+	Assert::exception(function () {
+		createContainer(__DIR__ . '/config/config.invalid.siteKey.neon');
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string, integer given.");
+
+	Assert::exception(function () {
+		createContainer(__DIR__ . '/config/config.invalid.secretKey.neon');
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string, integer given.");
 
 })();
 

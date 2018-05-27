@@ -1,0 +1,6 @@
+extensions:
+	recaptcha: ReCaptchaControl\DI\Extension
+
+recaptcha:
+	siteKey: 1
+	secretKey: SECRET_KEY
