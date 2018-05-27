@@ -1,6 +1,7 @@
 <?php
 
 use Tester\Assert;
+use Tester\Helpers;
 use Nette\Forms\Form;
 use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
@@ -101,7 +102,11 @@ require_once __DIR__ . '/CustomRequester.php';
 function createContainer($config = null)
 {
 	$configurator = new Nette\Configurator;
-	$configurator->setTempDirectory(__DIR__ . '/temp');
+
+	$tempDir = __DIR__ . '/temp/' . getmypid();
+
+	Helpers::purge($tempDir);
+	$configurator->setTempDirectory($tempDir);
 
 	if ($config) {
 		$configurator->addConfig($config);
