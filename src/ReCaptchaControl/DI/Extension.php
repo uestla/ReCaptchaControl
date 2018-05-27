@@ -10,6 +10,7 @@
 
 namespace ReCaptchaControl\DI;
 
+use Nette\DI\Statement;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
 use ReCaptchaControl\Control;
@@ -49,8 +50,8 @@ class Extension extends CompilerExtension
 		$config = $this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 
-		Validators::assertField($config, 'siteKey', 'string');
-		Validators::assertField($config, 'secretKey', 'string');
+		Validators::assertField($config, 'siteKey', sprintf('string|%s', Statement::class));
+		Validators::assertField($config, 'secretKey', sprintf('string|%s', Statement::class));
 		Validators::assertField($config, 'methodName', 'string');
 		Validators::assertField($config, 'requester', 'string');
 

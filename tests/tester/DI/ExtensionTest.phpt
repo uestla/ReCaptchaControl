@@ -20,20 +20,20 @@ require_once __DIR__ . '/../bootstrap.php';
 	// missing keys
 	Assert::exception(function () {
 		createContainer(__DIR__ . '/config/config.missing.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string, NULL given.");
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, NULL given.");
 
 	Assert::exception(function () {
 		createContainer(__DIR__ . '/config/config.missing.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string, NULL given.");
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, NULL given.");
 
 	// invalid types
 	Assert::exception(function () {
 		createContainer(__DIR__ . '/config/config.invalid.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string, integer given.");
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, integer given.");
 
 	Assert::exception(function () {
 		createContainer(__DIR__ . '/config/config.invalid.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string, integer given.");
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, integer given.");
 
 })();
 
@@ -105,5 +105,14 @@ require_once __DIR__ . '/../bootstrap.php';
 	$form = new Form;
 	$form->addTheSweetRecaptcha('recaptcha');
 	Assert::type(Control::class, $form['recaptcha']);
+
+})();
+
+
+// factories
+(function () {
+
+	$container = createContainer(__DIR__ . '/config/config.factories.neon');
+	Assert::type(CustomRequester::class, $container->getByType(IRequester::class));
 
 })();
