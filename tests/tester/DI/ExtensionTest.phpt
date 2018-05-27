@@ -53,7 +53,9 @@ require_once __DIR__ . '/../bootstrap.php';
 
 	$container = createContainer(__DIR__ . '/config/config.curlRequester.neon');
 
+	/** @var IRequester $requester */
 	$requester = $container->getByType(IRequester::class);
+
 	Assert::type(CurlRequester::class, $requester);
 	Assert::false($requester->post('https://google.com')); // check also the invalid certificate options right away
 
@@ -74,7 +76,9 @@ require_once __DIR__ . '/../bootstrap.php';
 
 	$container = createContainer(__DIR__ . '/config/config.customRequester.neon');
 
+	/** @var IRequester $requester */
 	$requester = $container->getByType(IRequester::class);
+
 	Assert::type(CustomRequester::class, $requester);
 
 	$response = $requester->post('https://google.com');
