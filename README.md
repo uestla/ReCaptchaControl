@@ -214,14 +214,15 @@ IMPORTANT: The [recaptcha.ajax.js](assets/recaptcha.ajax.js) script loads the of
 You can also use this library for [Invisible reCAPTCHA](https://developers.google.com/recaptcha/docs/invisible). The backend part stays the same so it only needs proper configuration in the frontend. To see it in action you can visit https://kesspess.cz/recaptcha/invisible and the code in [tests](tests/manual/app/presenters/templates/Test/invisible.latte). 
 
 
-## Tests
+## Tests & CI
 
 ### Automated tests
 
-This library uses [Nette Tester](https://tester.nette.org/) for automated testing. For running them yourself simply run
+This library uses [Nette Tester](https://tester.nette.org/) for automated testing and [PHPStan](https://github.com/phpstan/phpstan) for static analysis. For running them yourself simply run
 
 ```
-composer test
+# runs test suite & static analysis
+composer ci
 ```
 
 ### Manual testing

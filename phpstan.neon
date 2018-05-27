@@ -1,0 +1,4 @@
+parameters:
+	bootstrap: %rootDir%/../../../../vendor/autoload.php
+	ignoreErrors:
+		- '#^Call to an undefined method Nette\\Utils\\Html::class\(\)\.\z#'

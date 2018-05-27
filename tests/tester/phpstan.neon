@@ -1,0 +1,9 @@
+parameters:
+	bootstrap: %rootDir%/../../../../tests/tester/autoload.php
+	excludes_analyse:
+		- %rootDir%/../../../../tests/tester/temp/*
+	fileExtensions:
+		- php
+		- phpt
+	ignoreErrors:
+		- '#^Call to an undefined method Nette\\Forms\\Form::(addRecaptcha|addTheSweetRecaptcha)\(\)\.\z#'
