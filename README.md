@@ -92,6 +92,9 @@ You can then render the control in your Latte template using both macro and `n:a
 
 	{* or macro *}
 	{input captcha}
+
+	{* don't forget to render potential errors *}
+	{$form['captcha']->getError()}
 </form>
 ```
 
