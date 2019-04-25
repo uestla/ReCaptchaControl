@@ -71,7 +71,7 @@ class Control extends Forms\Controls\BaseControl
 
 
 	/** @return bool */
-	public function isFilled()
+	public function isFilled() : bool
 	{
 		return true;
 	}
