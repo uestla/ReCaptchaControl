@@ -16,11 +16,7 @@ interface IRequester
 
 	/**
 	 * Performs a HTTP POST request with given $values
-	 *
-	 * @param  string $url
-	 * @param  array $values
-	 * @return string|false
 	 */
-	public function post($url, array $values = []);
+	public function post(string $url, array $values = []) : ?string;
 
 }
