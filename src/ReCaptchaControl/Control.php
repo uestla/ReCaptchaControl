@@ -29,13 +29,7 @@ class Control extends Forms\Controls\BaseControl
 	private $initialized = false;
 
 
-	/**
-	 * @param  Validator $validator
-	 * @param  Renderer $renderer
-	 * @param  string $caption
-	 * @param  string $message
-	 */
-	public function __construct(Validator $validator, Renderer $renderer, $caption = null, $message = null)
+	public function __construct(Validator $validator, Renderer $renderer, ?string $caption = null, ?string $message = null)
 	{
 		parent::__construct($caption);
 
@@ -83,7 +77,7 @@ class Control extends Forms\Controls\BaseControl
 	}
 
 
-	public static function register(Validator $validator, Renderer $renderer, $method = 'addRecaptcha') : void
+	public static function register(Validator $validator, Renderer $renderer, string $method = 'addRecaptcha') : void
 	{
 		Forms\Container::extensionMethod($method, function ($container, $name, $label = null, $message = null) use ($validator, $renderer) {
 			return $container[$name] = new Control($validator, $renderer, $label, $message);
