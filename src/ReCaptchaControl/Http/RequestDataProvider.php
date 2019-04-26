@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http;
 
 use Nette\Http\Request;
@@ -28,14 +30,14 @@ class RequestDataProvider implements IRequestDataProvider
 
 
 	/** @inheritdoc */
-	public function getResponseValue()
+	public function getResponseValue() : ?string
 	{
 		return $this->httpRequest->getPost(self::RESPONSE_KEY, null);
 	}
 
 
 	/** @inheritdoc */
-	public function getRemoteIP()
+	public function getRemoteIP() : ?string
 	{
 		return $this->httpRequest->getRemoteAddress();
 	}

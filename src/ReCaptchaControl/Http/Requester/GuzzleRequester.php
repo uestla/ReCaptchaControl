@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http\Requester;
 
 use Guzzle\Http\Client;
@@ -28,7 +30,7 @@ class GuzzleRequester implements IRequester
 
 
 	/** @inheritdoc */
-	public function post($url, array $values = [])
+	public function post(string $url, array $values = []) : ?string
 	{
 		try {
 			$request = $this->client->post($url, [
@@ -40,7 +42,7 @@ class GuzzleRequester implements IRequester
 
 		} catch (\Exception $e) {} // convert exception & bubble up?
 
-		return false;
+		return null;
 	}
 
 }

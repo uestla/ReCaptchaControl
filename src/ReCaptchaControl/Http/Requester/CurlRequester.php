@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http\Requester;
 
 use Nette\Utils\Strings;
@@ -32,7 +34,7 @@ class CurlRequester implements IRequester
 
 
 	/** @inheritdoc */
-	public function post($url, array $values = [])
+	public function post(string $url, array $values = []) : ?string
 	{
 		$ch = curl_init();
 
@@ -52,15 +54,11 @@ class CurlRequester implements IRequester
 			return $response;
 		}
 
-		return false; // throw exception?
+		return null; // throw exception?
 	}
 
 
-	/**
-	 * @param  array $options
-	 * @return array
-	 */
-	private static function processOptions(array $options)
+	private static function processOptions(array $options) : array
 	{
 		// NOTE: intentionally not using array_walk since array keys cannot be changed
 		foreach ($options as $key => $val) {

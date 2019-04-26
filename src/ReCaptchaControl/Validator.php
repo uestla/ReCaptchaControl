@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl;
 
 use Nette\Utils;
@@ -44,8 +46,7 @@ class Validator
 	}
 
 
-	/** @return bool */
-	public function validate()
+	public function validate() : bool
 	{
 		$response = $this->requestDataProvider->getResponseValue();
 

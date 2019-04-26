@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl;
 
 use Nette\Forms;
@@ -59,8 +61,7 @@ class Control extends Forms\Controls\BaseControl
 	}
 
 
-	/** @return Html */
-	public function getControl()
+	public function getControl() : Html
 	{
 		$this->setOption('rendered', true);
 		$el = clone $this->control;
@@ -70,30 +71,19 @@ class Control extends Forms\Controls\BaseControl
 	}
 
 
-	/** @return bool */
 	public function isFilled() : bool
 	{
 		return true;
 	}
 
 
-	/**
-	 * @param  Control $control
-	 * @return bool
-	 */
-	public static function validateValid(Control $control)
+	public static function validateValid(Control $control) : bool
 	{
 		return $control->validator->validate();
 	}
 
 
-	/**
-	 * @param  Validator $validator
-	 * @param  Renderer $renderer
-	 * @param  string $method
-	 * @return void
-	 */
-	public static function register(Validator $validator, Renderer $renderer, $method = 'addRecaptcha')
+	public static function register(Validator $validator, Renderer $renderer, $method = 'addRecaptcha') : void
 	{
 		Forms\Container::extensionMethod($method, function ($container, $name, $label = null, $message = null) use ($validator, $renderer) {
 			return $container[$name] = new Control($validator, $renderer, $label, $message);
