@@ -3,14 +3,23 @@
 namespace Tests\Mocks;
 
 use ReCaptchaControl\Http\Requester\IRequester;
+use ReCaptchaControl\Http\Requester\RequestException;
 
 
-class CustomRequester implements IRequester
+final class CustomRequester implements IRequester
 {
 
-	public function post($url, array $values = [])
+	/** @inheritdoc */
+	public function post($url, array $values = []): string
 	{
-		return strrev((string) file_get_contents($url));
+		$content = @file_get_contents($url);
+
+		if ($content === false) {
+			$error = error_get_last();
+			throw RequestException::create($url, $error === null ? '' : $error['message']);
+		}
+
+		return strrev($content);
 	}
 
 }

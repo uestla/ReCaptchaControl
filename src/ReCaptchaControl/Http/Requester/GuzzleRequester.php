@@ -36,9 +36,9 @@ class GuzzleRequester implements IRequester
 
 			return (string) $response->getBody();
 
-		} catch (\Exception $e) {} // convert exception & bubble up?
+		} catch (\Exception $e) {}
 
-		return false;
+		throw RequestException::create($url, $e->getMessage());
 	}
 
 }

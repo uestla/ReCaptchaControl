@@ -8,20 +8,17 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http\Requester;
 
 
-interface IRequester
+class RequestException extends \Exception
 {
 
-	/**
-	 * Performs a HTTP POST request with given $values
-	 *
-	 * @param  string $url
-	 * @param  array $values
-	 * @return string
-	 * @throws RequestException
-	 */
-	public function post($url, array $values = []);
+	public static function create(string $url, string $error): self
+	{
+		return new self(sprintf('Cannot fetch URL "%s": %s', $url, $error));
+	}
 
 }

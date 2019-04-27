@@ -10,9 +10,11 @@
 
 namespace ReCaptchaControl;
 
-use Nette\Utils;
+use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 use ReCaptchaControl\Http\IRequestDataProvider;
 use ReCaptchaControl\Http\Requester\IRequester;
+use ReCaptchaControl\Http\Requester\RequestException;
 
 
 class Validator
@@ -53,24 +55,25 @@ class Validator
 			return false;
 		}
 
-		$result = $this->requester->post(self::VERIFICATION_URL . '?' . http_build_query([
-			'secret' => $this->secretKey,
-			'response' => $response,
-			'remoteip' => $this->requestDataProvider->getRemoteIP(),
-
-		], '', '&'));
-
-		if (!$result) {
-			return false;
-		}
-
 		try {
-			$json = Utils\Json::decode($result);
-			return isset($json->success) && $json->success;
+			$url = sprintf('%s?%s', self::VERIFICATION_URL, http_build_query([
+				'secret' => $this->secretKey,
+				'response' => $response,
+				'remoteip' => $this->requestDataProvider->getRemoteIP(),
 
-		} catch (Utils\JsonException $e) {
-			return false;
-		}
+			], '', '&'));
+
+			$result = $this->requester->post($url);
+
+			try {
+				$json = Json::decode($result);
+				return isset($json->success) && $json->success;
+
+			} catch (JsonException $e) {}
+
+		} catch (RequestException $e) {}
+
+		return false;
 	}
 
 }

@@ -26,7 +26,14 @@ class SimpleRequester implements IRequester
 			],
 		]);
 
-		return file_get_contents($url, false, $context);
+		$response = file_get_contents($url, false, $context);
+
+		if ($response === false) {
+			$error = error_get_last();
+			throw RequestException::create($url, $error === null ? '' : $error['message']);
+		}
+
+		return $response;
 	}
 
 }

@@ -11,6 +11,7 @@ use ReCaptchaControl\Http\Requester\IRequester;
 use ReCaptchaControl\Http\Requester\CurlRequester;
 use ReCaptchaControl\Http\Requester\GuzzleRequester;
 use ReCaptchaControl\Http\Requester\SimpleRequester;
+use ReCaptchaControl\Http\Requester\RequestException;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -68,7 +69,10 @@ require_once __DIR__ . '/../bootstrap.php';
 	$requester = $container->getByType(IRequester::class);
 
 	Assert::type(CurlRequester::class, $requester);
-	Assert::false($requester->post('https://google.com')); // check also the invalid certificate options right away
+
+	Assert::exception(static function () use ($requester): void {
+		$requester->post('https://google.com');
+	}, RequestException::class, 'Cannot fetch URL "https://google.com": error setting certificate verify locations:%A%'); // check also the invalid certificate options right away
 
 })();
 
