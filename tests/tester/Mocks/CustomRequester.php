@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Mocks;
+
 use ReCaptchaControl\Http\Requester\IRequester;
 
 

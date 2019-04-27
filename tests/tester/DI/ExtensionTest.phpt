@@ -5,6 +5,7 @@ use Nette\Forms\Form;
 use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
 use ReCaptchaControl\Validator;
+use Tests\Mocks\CustomRequester;
 use Nette\Utils\AssertionException;
 use ReCaptchaControl\Http\Requester\IRequester;
 use ReCaptchaControl\Http\Requester\CurlRequester;
@@ -91,8 +92,8 @@ require_once __DIR__ . '/../bootstrap.php';
 
 	Assert::type(CustomRequester::class, $requester);
 
-	$response = $requester->post('https://google.com');
-	Assert::true(stripos($response, 'elgooG') !== false);
+	$response = $requester->post('http://example.com');
+	Assert::true(stripos($response, 'niamoD elpmaxE') !== false);
 
 })();
 

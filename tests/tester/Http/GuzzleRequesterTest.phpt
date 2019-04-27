@@ -14,8 +14,8 @@ require_once __DIR__ . '/../bootstrap.php';
 	$client = new Client;
 	$requester = new GuzzleRequester($client);
 
-	$response = $requester->post('https://seznam.cz');
+	$response = $requester->post('https://example.com');
 	Assert::type('string', $response);
-	Assert::true(stripos($response, 'Google') !== false);
+	Assert::true(stripos($response, 'Example Domain') !== false);
 
 })();

@@ -1,6 +1,9 @@
 <?php
 
-class MyFactory
+use Tests\Mocks\CustomRequester;
+
+
+final class MyFactory
 {
 
 	public function factorySiteKey()

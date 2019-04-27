@@ -8,4 +8,4 @@ recaptcha:
 
 services:
 	customRequester:
-		factory: CustomRequester
+		factory: Tests\Mocks\CustomRequester

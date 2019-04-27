@@ -13,9 +13,9 @@ require_once __DIR__ . '/../bootstrap.php';
 
 	$requester = new CurlRequester;
 
-	$response = $requester->post('https://google.com');
+	$response = $requester->post('http://example.com');
 	Assert::type('string', $response);
-	Assert::true(stripos($response, 'Google') !== false);
+	Assert::true(stripos($response, 'Example Domain') !== false);
 
 })();
 
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../bootstrap.php';
 		CURLOPT_CAINFO => __FILE__,
 	]);
 
-	Assert::false($requester->post('https://google.com'));
+	Assert::false($requester->post('https://example.com'));
 
 })();
 
@@ -41,7 +41,7 @@ require_once __DIR__ . '/../bootstrap.php';
 		CURLOPT_URL => 'https://www.seznam.cz',
 	]);
 
-	$response = $requester->post('https://google.com');
-	Assert::true(stripos($response, 'Google') !== false);
+	$response = $requester->post('http://example.com');
+	Assert::true(stripos($response, 'Example Domain') !== false);
 
 })();

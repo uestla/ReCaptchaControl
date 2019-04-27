@@ -12,8 +12,8 @@ require_once __DIR__ . '/../bootstrap.php';
 
 	$requester = new SimpleRequester;
 
-	$response = $requester->post('https://google.com');
+	$response = $requester->post('https://example.com');
 	Assert::type('string', $response);
-	Assert::true(stripos($response, 'Google') !== false);
+	Assert::true(stripos($response, 'Example Domain') !== false);
 
 })();

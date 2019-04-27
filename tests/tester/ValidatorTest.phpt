@@ -4,8 +4,9 @@ use Tester\Assert;
 use Nette\Forms\Form;
 use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
-use Nette\Http\RequestFactory;
 use ReCaptchaControl\Validator;
+use Tests\Mocks\ErrorRequester;
+use Tests\Mocks\RequestFactory;
 use ReCaptchaControl\Http\RequestDataProvider;
 use ReCaptchaControl\Http\Requester\CurlRequester;
 
@@ -15,7 +16,7 @@ require_once __DIR__ . '/bootstrap.php';
 // multiple addRule() error
 (function () {
 
-	$httpRequest = (new RequestFactory())->createHttpRequest();
+	$httpRequest = RequestFactory::create();
 	$requestDataProvider = new RequestDataProvider($httpRequest);
 
 	$requester = new CurlRequester;
@@ -31,11 +32,11 @@ require_once __DIR__ . '/bootstrap.php';
 	Assert::error(function () use ($control) {
 		$control->addRule([Control::class, 'validateValid']);
 
-	}, E_USER_DEPRECATED);
+	}, E_USER_DEPRECATED, 'ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.');
 
 	Assert::error(function () use ($control) {
 		$control->addRule(Control::class . '::validateValid');
 
-	}, E_USER_DEPRECATED);
+	}, E_USER_DEPRECATED, 'ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.');
 
 })();
