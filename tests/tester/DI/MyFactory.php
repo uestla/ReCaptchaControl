@@ -1,25 +1,27 @@
 <?php
 
+declare(strict_types = 1);
+
 use Tests\Mocks\CustomRequester;
+use ReCaptchaControl\Http\Requester\IRequester;
 
 
 final class MyFactory
 {
 
-	public function factorySiteKey()
+	public function factorySiteKey(): string
 	{
 		return 'SITE_KEY';
 	}
 
 
-	public function factorySecretKey()
+	public function factorySecretKey(): string
 	{
 		return 'SECRET_KEY';
 	}
 
 
-	/** @return CustomRequester */
-	public function createRequester()
+	public function createRequester(): IRequester
 	{
 		return new CustomRequester;
 	}

@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl;
 
 use Nette\Utils\Json;
@@ -37,15 +39,10 @@ class Validator
 	public $onError = [];
 
 
-	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
+	private const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
 
-	/**
-	 * @param  IRequestDataProvider $requestDataProvider
-	 * @param  IRequester $requester
-	 * @param  string $secretKey
-	 */
-	public function __construct(IRequestDataProvider $requestDataProvider, IRequester $requester, $secretKey)
+	public function __construct(IRequestDataProvider $requestDataProvider, IRequester $requester, string $secretKey)
 	{
 		$this->secretKey = $secretKey;
 		$this->requester = $requester;
@@ -53,8 +50,7 @@ class Validator
 	}
 
 
-	/** @return bool */
-	public function validate()
+	public function validate(): bool
 	{
 		$response = $this->requestDataProvider->getResponseValue();
 

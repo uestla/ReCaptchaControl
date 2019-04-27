@@ -175,7 +175,7 @@ You can change the default requester by setting the `requester` key in [configur
 
 	You can also implement your own requester. Just make sure it implements the [ReCaptchaControl\Http\Requester\IRequester](src/ReCaptchaControl/Http/Requester/IRequester.php) interface.
 
-	It basically requires a single `public function post($url, array $values = [])` method which takes URL, performs a HTTP POST request with given `$values` and returns body of the response as a string. In case of a failure, `ReCaptchaControl\Http\Requester\RequestException` should be thrown.
+	It basically requires a single `public function post(string $url, array $values = []): string` method which takes URL, performs a HTTP POST request with given `$values` and returns body of the response as a string. In case of a failure, `ReCaptchaControl\Http\Requester\RequestException` should be thrown.
 
 	You can then use it the same way as above:
 

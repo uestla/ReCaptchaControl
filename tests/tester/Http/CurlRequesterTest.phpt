@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Tests\App;
 
 use Tester\Assert;
@@ -10,19 +12,19 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // request google.com
-(function () {
+(static function (): void {
 
 	$requester = new CurlRequester;
 
 	$response = $requester->post('http://example.com');
 	Assert::type('string', $response);
-	Assert::true(stripos($response, 'Example Domain') !== false);
+	Assert::true(stripos((string) $response, 'Example Domain') !== false);
 
 })();
 
 
 // invalid certificates
-(function () {
+(static function (): void {
 
 	// set invalid CA paths but leave SSL verifications on
 	$requester = new CurlRequester([
@@ -38,13 +40,13 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // overloaded options
-(function () {
+(static function (): void {
 
 	$requester = new CurlRequester([
 		CURLOPT_URL => 'https://www.seznam.cz',
 	]);
 
 	$response = $requester->post('http://example.com');
-	Assert::true(stripos($response, 'Example Domain') !== false);
+	Assert::true(stripos((string) $response, 'Example Domain') !== false);
 
 })();

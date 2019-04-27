@@ -8,14 +8,15 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http\Requester;
 
 
 class SimpleRequester implements IRequester
 {
 
-	/** @inheritdoc */
-	public function post($url, array $values = [])
+	public function post(string $url, array $values = []): string
 	{
 		$context = stream_context_create([
 			'http' => [

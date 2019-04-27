@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl;
 
 use Nette\Utils;
@@ -20,15 +22,13 @@ class Renderer
 	private $siteKey;
 
 
-	/** @param string $siteKey */
-	public function __construct($siteKey)
+	public function __construct(string $siteKey)
 	{
 		$this->siteKey = $siteKey;
 	}
 
 
-	/** @return Utils\Html */
-	public function getHtml()
+	public function getHtml(): Utils\Html
 	{
 		return Utils\Html::el('div')
 			->class('g-recaptcha')

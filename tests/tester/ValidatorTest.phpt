@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Tester\Assert;
 use Nette\Forms\Form;
 use ReCaptchaControl\Control;
@@ -14,7 +16,7 @@ require_once __DIR__ . '/bootstrap.php';
 
 
 // multiple addRule() error
-(function () {
+(static function (): void {
 
 	$httpRequest = RequestFactory::create();
 	$requestDataProvider = new RequestDataProvider($httpRequest);
@@ -29,12 +31,12 @@ require_once __DIR__ . '/bootstrap.php';
 	$form = new Form;
 	$control = $form->addRecaptcha('recaptcha');
 
-	Assert::error(function () use ($control) {
+	Assert::error(static function () use ($control): void {
 		$control->addRule([Control::class, 'validateValid']);
 
 	}, E_USER_DEPRECATED, 'ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.');
 
-	Assert::error(function () use ($control) {
+	Assert::error(static function () use ($control): void {
 		$control->addRule(Control::class . '::validateValid');
 
 	}, E_USER_DEPRECATED, 'ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.');
@@ -43,7 +45,7 @@ require_once __DIR__ . '/bootstrap.php';
 
 
 // onError event
-(function () {
+(static function (): void {
 
 	$httpRequest = RequestFactory::create();
 	$requestDataProvider = new RequestDataProvider($httpRequest);

@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http;
 
 
@@ -16,10 +18,8 @@ interface IRequestDataProvider
 
 	const RESPONSE_KEY = 'g-recaptcha-response';
 
-	/** @return string|null */
-	public function getResponseValue();
+	public function getResponseValue(): ?string;
 
-	/** @return string|null */
-	public function getRemoteIP();
+	public function getRemoteIP(): ?string;
 
 }

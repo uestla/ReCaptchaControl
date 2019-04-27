@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\DI;
 
 use Nette\DI\Statement;
@@ -44,8 +46,7 @@ class Extension extends CompilerExtension
 	protected $prefix;
 
 
-	/** @return void */
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$config = $this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
@@ -76,11 +77,7 @@ class Extension extends CompilerExtension
 	}
 
 
-	/**
-	 * @param  ClassType $class
-	 * @return void
-	 */
-	public function afterCompile(ClassType $class)
+	public function afterCompile(ClassType $class): void
 	{
 		$initialize = $class->getMethod('initialize');
 		$config = $this->validateConfig($this->defaults);

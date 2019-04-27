@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Tester\Helpers;
 use Nette\DI\Container;
 
@@ -12,15 +14,14 @@ require_once __DIR__ . '/DI/MyFactory.php';
 
 // === helpers =========================
 
-function dd($var)
+function dd($var): void
 {
 	array_map('dump', func_get_args());
 	exit(1);
 }
 
 
-/** @return Container */
-function createContainer($config = null)
+function createContainer($config = null): Container
 {
 	$configurator = new Nette\Configurator;
 

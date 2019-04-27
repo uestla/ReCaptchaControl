@@ -9,19 +9,18 @@
 		"issues": "https://github.com/uestla/ReCaptchaControl/issues"
 	},
 	"require": {
-		"php": ">=5.6.0",
-		"nette/di": "^2.4 || ^3.0",
-		"nette/http": "^2.4 || ^3.0",
-		"nette/forms": "^2.4 || ^3.0",
-		"nette/utils": "^2.4 || ^3.0",
-		"nette/php-generator": "^2.4 || ^3.0"
+		"php": ">=7.1",
+		"nette/di": "^3.0",
+		"nette/http": "^3.0",
+		"nette/forms": "^3.0",
+		"nette/utils": "^3.0",
+		"nette/php-generator": "^3.0"
 	},
 	"require-dev": {
-		"php": ">= 7.0",
-		"tracy/tracy": "^2.4",
-		"latte/latte": "^2.4",
-		"nette/tester": "^2.0",
-		"nette/bootstrap": "^2.4",
+		"tracy/tracy": "^2.6",
+		"latte/latte": "^2.5",
+		"nette/bootstrap": "^3.0",
+		"nette/tester": "^2.2",
 		"guzzlehttp/guzzle": "^6.3"
 	},
 	"suggest": {

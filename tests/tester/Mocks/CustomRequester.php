@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Tests\Mocks;
 
 use ReCaptchaControl\Http\Requester\IRequester;
@@ -9,8 +11,7 @@ use ReCaptchaControl\Http\Requester\RequestException;
 final class CustomRequester implements IRequester
 {
 
-	/** @inheritdoc */
-	public function post($url, array $values = []): string
+	public function post(string $url, array $values = []): string
 	{
 		$content = @file_get_contents($url);
 

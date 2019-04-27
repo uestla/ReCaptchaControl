@@ -8,6 +8,8 @@
  * @link     https://github.com/uestla/ReCaptchaControl
  */
 
+declare(strict_types = 1);
+
 namespace ReCaptchaControl\Http\Requester;
 
 use GuzzleHttp\ClientInterface;
@@ -26,8 +28,7 @@ class GuzzleRequester implements IRequester
 	}
 
 
-	/** @inheritdoc */
-	public function post($url, array $values = [])
+	public function post(string $url, array $values = []): string
 	{
 		try {
 			$response = $this->client->request('POST', $url, [

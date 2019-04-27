@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use Tester\Assert;
 use Nette\Forms\Form;
 use ReCaptchaControl\Control;
@@ -17,31 +19,31 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // invalid fields
-(function () {
+(static function (): void {
 
 	// missing keys
-	Assert::exception(function () {
+	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.missing.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, NULL given.");
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, null given.");
 
-	Assert::exception(function () {
+	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.missing.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, NULL given.");
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, null given.");
 
 	// invalid types
-	Assert::exception(function () {
+	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.invalid.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, integer given.");
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, int 1 given.");
 
-	Assert::exception(function () {
+	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.invalid.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, integer given.");
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, int 1 given.");
 
 })();
 
 
 // default services
-(function () {
+(static function (): void {
 
 	$container = createContainer(__DIR__ . '/config/config.simple.neon');
 	Assert::type(Renderer::class, $container->getByType(Renderer::class));
@@ -52,7 +54,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // SimpleRequester
-(function () {
+(static function (): void {
 
 	$container = createContainer(__DIR__ . '/config/config.simpleRequester.neon');
 	Assert::type(SimpleRequester::class, $container->getByType(IRequester::class));
@@ -61,7 +63,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // CurlRequester
-(function () {
+(static function (): void {
 
 	$container = createContainer(__DIR__ . '/config/config.curlRequester.neon');
 
@@ -78,7 +80,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // GuzzleRequester
-(function () {
+(static function (): void {
 
 	$container = createContainer(__DIR__ . '/config/config.guzzleRequester.neon');
 	Assert::type(GuzzleRequester::class, $container->getByType(IRequester::class));
@@ -87,7 +89,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // custom requester
-(function () {
+(static function (): void {
 
 	$container = createContainer(__DIR__ . '/config/config.customRequester.neon');
 
@@ -103,7 +105,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // method name
-(function () {
+(static function (): void {
 
 	createContainer(__DIR__ . '/config/config.methodName.neon');
 
@@ -115,7 +117,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 
 // factories
-(function () {
+(static function (): void {
 
 	$container = createContainer(__DIR__ . '/config/config.factories.neon');
 	Assert::type(CustomRequester::class, $container->getByType(IRequester::class));
