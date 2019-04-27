@@ -10,18 +10,17 @@
 
 namespace ReCaptchaControl\Http\Requester;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\ClientInterface;
 
 
 class GuzzleRequester implements IRequester
 {
 
-	/** @var Client */
+	/** @var ClientInterface */
 	private $client;
 
 
-	/** @param  Client $client */
-	public function __construct(Client $client)
+	public function __construct(ClientInterface $client)
 	{
 		$this->client = $client;
 	}
@@ -31,12 +30,11 @@ class GuzzleRequester implements IRequester
 	public function post($url, array $values = [])
 	{
 		try {
-			$request = $this->client->post($url, [
+			$response = $this->client->request('POST', $url, [
 				'form_params' => $values,
 			]);
 
-			$response = $request->send();
-			return $response->getBody(true);
+			return (string) $response->getBody();
 
 		} catch (\Exception $e) {} // convert exception & bubble up?
 

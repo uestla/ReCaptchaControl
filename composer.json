@@ -22,11 +22,12 @@
 		"latte/latte": "^2.4",
 		"nette/tester": "^2.0",
 		"nette/bootstrap": "^2.4",
-		"guzzlehttp/guzzle": "^3.8",
+		"guzzlehttp/guzzle": "^6.3",
 		"phpstan/phpstan-shim": "^0.9.2"
 	},
 	"suggest": {
-		"ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester\\CurlRequester."
+		"ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester\\CurlRequester.",
+		"guzzlehttp/guzzle": "Needed by ReCaptchaControl\\Http\\Requester\\GuzzleRequester."
 	},
 	"autoload": {
 		"psr-0": {
