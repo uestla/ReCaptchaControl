@@ -20,9 +20,6 @@ class Control extends Forms\Controls\BaseControl
 	/** @var Validator */
 	private $validator;
 
-	/** @var Renderer */
-	private $renderer;
-
 	/** @var bool */
 	private $initialized = false;
 
@@ -38,7 +35,6 @@ class Control extends Forms\Controls\BaseControl
 		parent::__construct($caption);
 
 		$this->setOmitted();
-		$this->renderer = $renderer;
 		$this->validator = $validator;
 		$this->control = $renderer->getHtml();
 		$this->setRequired(true)->addRule(__CLASS__ . '::validateValid', $message);
