@@ -40,3 +40,24 @@ require_once __DIR__ . '/bootstrap.php';
 	}, E_USER_DEPRECATED, 'ReCaptchaControl is required by default and thus calling addRule() is deprecated. Please remove it to prevent multiple validation.');
 
 })();
+
+
+// onError event
+(function () {
+
+	$httpRequest = RequestFactory::create();
+	$requestDataProvider = new RequestDataProvider($httpRequest);
+	$requester = new ErrorRequester;
+
+	$validator = new Validator($requestDataProvider, $requester, 'RECAPTCHA_SECRETKEY');
+
+	$bool = false;
+	$validator->onError[] = static function (\Exception $e) use (& $bool): void {
+		$bool = true;
+		Assert::match('Cannot fetch URL "https://www.google.com/recaptcha/api/siteverify?secret=RECAPTCHA_SECRETKEY&response=%a%": Error occurred!', $e->getMessage());
+	};
+
+	Assert::false($validator->validate());
+	Assert::true($bool); // changed by onError event
+
+})();

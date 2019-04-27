@@ -11,6 +11,7 @@
 namespace ReCaptchaControl;
 
 use Nette\Utils\Json;
+use Nette\SmartObject;
 use Nette\Utils\JsonException;
 use ReCaptchaControl\Http\IRequestDataProvider;
 use ReCaptchaControl\Http\Requester\IRequester;
@@ -20,6 +21,9 @@ use ReCaptchaControl\Http\Requester\RequestException;
 class Validator
 {
 
+	use SmartObject;
+
+
 	/** @var IRequestDataProvider */
 	private $requestDataProvider;
 
@@ -28,6 +32,9 @@ class Validator
 
 	/** @var string */
 	private $secretKey;
+
+	/** @var callable[] */
+	public $onError = [];
 
 
 	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
@@ -71,7 +78,9 @@ class Validator
 
 			} catch (JsonException $e) {}
 
-		} catch (RequestException $e) {}
+		} catch (RequestException $e) {
+			$this->onError($e);
+		}
 
 		return false;
 	}
