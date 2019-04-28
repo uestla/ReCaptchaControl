@@ -1,4 +1,18 @@
 parameters:
-	bootstrap: %rootDir%/../../../../vendor/autoload.php
+	level: max
+	paths:
+		- src/
+		- tests/tester/
+	fileExtensions:
+		- php
+		- phpt
+
+	tmpDir: tests/var/temp
+	autoload_files:
+		- vendor/autoload.php
+	bootstrap: tests/tester/autoload.php
+	excludes_analyse:
+		- tests/tester/temp/
 	ignoreErrors:
 		- '#^Call to an undefined method Nette\\Utils\\Html::class\(\)\.\z#'
+		- '#^Call to an undefined method Nette\\Forms\\Form::(addRecaptcha|addTheSweetRecaptcha)\(\)\.\z#'

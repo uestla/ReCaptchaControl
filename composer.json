@@ -22,8 +22,7 @@
 		"latte/latte": "^2.4",
 		"nette/tester": "^2.0",
 		"nette/bootstrap": "^2.4",
-		"guzzlehttp/guzzle": "^6.3",
-		"phpstan/phpstan-shim": "^0.9.2"
+		"guzzlehttp/guzzle": "^6.3"
 	},
 	"suggest": {
 		"ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester\\CurlRequester.",
@@ -34,11 +33,7 @@
 	},
 	"scripts": {
 		"ci": ["@phpstan", "@test"],
-
-		"phpstan": ["@phpstan-src", "@phpstan-tests"],
-		"phpstan-src": "phpstan analyse src/ --level max --configuration phpstan.neon",
-		"phpstan-tests": "phpstan analyse tests/tester/ --level max --configuration tests/tester/phpstan.neon",
-
+		"phpstan": "phpstan analyse",
 		"test": "tester -C tests/tester/",
 		"test-coverage": "tester -C --coverage-src src/RecaptchaControl --coverage-src tests/tester/ --coverage tests/var/log/coverage.html tests/tester/"
 	}
