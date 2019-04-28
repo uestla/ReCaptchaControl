@@ -30,9 +30,7 @@
 		"guzzlehttp/guzzle": "Needed by ReCaptchaControl\\Http\\Requester\\GuzzleRequester."
 	},
 	"autoload": {
-		"psr-0": {
-			"ReCaptchaControl": "src/"
-		}
+		"classmap": ["src/"]
 	},
 	"scripts": {
 		"ci": ["@test", "@phpstan"],
