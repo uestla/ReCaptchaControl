@@ -93,7 +93,7 @@ require_once __DIR__ . '/../bootstrap.php';
 	Assert::type(CustomRequester::class, $requester);
 
 	$response = $requester->post('http://example.com');
-	Assert::true(stripos($response, 'niamoD elpmaxE') !== false);
+	Assert::true(stripos((string) $response, 'niamoD elpmaxE') !== false);
 
 })();
 
