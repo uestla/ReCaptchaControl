@@ -33,12 +33,12 @@
 		"classmap": ["src/"]
 	},
 	"scripts": {
-		"ci": ["@test", "@phpstan"],
-
-		"test": "tester -C tests/tester/",
+		"ci": ["@phpstan", "@test"],
 
 		"phpstan": ["@phpstan-src", "@phpstan-tests"],
 		"phpstan-src": "phpstan analyse src/ --level max --configuration phpstan.neon",
-		"phpstan-tests": "phpstan analyse tests/tester/ --level max --configuration tests/tester/phpstan.neon"
+		"phpstan-tests": "phpstan analyse tests/tester/ --level max --configuration tests/tester/phpstan.neon",
+
+		"test": "tester -C tests/tester/"
 	}
 }
