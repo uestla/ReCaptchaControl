@@ -24,20 +24,20 @@ require_once __DIR__ . '/../bootstrap.php';
 	// missing keys
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.missing.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, null given.");
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, null given.");
 
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.missing.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, null given.");
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, null given.");
 
 	// invalid types
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.invalid.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement, int 1 given.");
+	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, int 1 given.");
 
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.invalid.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement, int 1 given.");
+	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, int 1 given.");
 
 })();
 
