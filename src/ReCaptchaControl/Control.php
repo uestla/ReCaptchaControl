@@ -23,7 +23,7 @@ class Control extends Forms\Controls\BaseControl
 	private $validator;
 
 	/** @var bool */
-	private $initialized = false;
+	private $initialized;
 
 
 	public function __construct(Validator $validator, Renderer $renderer, ?string $caption = null, ?string $message = null)
@@ -39,6 +39,12 @@ class Control extends Forms\Controls\BaseControl
 	}
 
 
+	/**
+	 * @param  callable|string $validator
+	 * @param  string|object $message
+	 * @param  string $arg
+	 * @return self
+	 */
 	public function addRule($validator, $message = null, $arg = null)
 	{
 		if ($this->initialized
@@ -50,6 +56,7 @@ class Control extends Forms\Controls\BaseControl
 	}
 
 
+	/** @return Html<Html|string> */
 	public function getControl(): Html
 	{
 		$this->setOption('rendered', true);

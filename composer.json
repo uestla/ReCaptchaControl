@@ -17,11 +17,14 @@
 		"nette/php-generator": "^3.0"
 	},
 	"require-dev": {
+		"phpstan/phpstan": "^0.12.49",
+		"phpstan/extension-installer": "^1.0",
+		"phpstan/phpstan-nette": "^0.12.9",
 		"tracy/tracy": "^2.6",
 		"latte/latte": "^2.5",
 		"nette/bootstrap": "^3.0",
 		"nette/tester": "^2.2",
-		"guzzlehttp/guzzle": "^6.3"
+		"guzzlehttp/guzzle": "^7.2"
 	},
 	"suggest": {
 		"ext-curl": "Needed by the default ReCaptchaControl\\Http\\Requester\\CurlRequester.",

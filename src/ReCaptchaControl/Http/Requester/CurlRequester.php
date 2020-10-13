@@ -18,10 +18,11 @@ use Nette\Utils\Strings;
 class CurlRequester implements IRequester
 {
 
-	/** @var array */
+	/** @var mixed[] */
 	private $options;
 
 
+	/** @param  mixed[] $options */
 	public function __construct(array $options = [])
 	{
 		if (!extension_loaded('curl')) {
@@ -32,6 +33,7 @@ class CurlRequester implements IRequester
 	}
 
 
+	/** @param  array<string, mixed> $values */
 	public function post(string $url, array $values = []): string
 	{
 		$ch = curl_init();
@@ -57,6 +59,10 @@ class CurlRequester implements IRequester
 	}
 
 
+	/**
+	 * @param  mixed[] $options
+	 * @return mixed[]
+	 */
 	private static function processOptions(array $options): array
 	{
 		// NOTE: intentionally not using array_walk since array keys cannot be changed

@@ -14,6 +14,7 @@ require_once __DIR__ . '/DI/MyFactory.php';
 
 // === helpers =========================
 
+/** @param  mixed $var */
 function dd($var): void
 {
 	array_map('dump', func_get_args());
@@ -21,6 +22,7 @@ function dd($var): void
 }
 
 
+/** @param  string|mixed[] $config */
 function createContainer($config = null): Container
 {
 	$configurator = new Nette\Configurator;

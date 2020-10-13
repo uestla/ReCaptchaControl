@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace ReCaptchaControl;
 
-use Nette\Utils;
+use Nette\Utils\Html;
 
 
 class Renderer
@@ -28,9 +28,10 @@ class Renderer
 	}
 
 
-	public function getHtml(): Utils\Html
+	/** @return Html<Html|string> */
+	public function getHtml(): Html
 	{
-		return Utils\Html::el('div')
+		return Html::el('div')
 			->class('g-recaptcha')
 			->data('sitekey', $this->siteKey);
 	}
