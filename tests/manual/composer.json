@@ -17,6 +17,7 @@
 		"nette/security": "^3.0",
 		"nette/utils": "^3.0",
 		"latte/latte": "^2.5",
-		"tracy/tracy": "^2.6"
+		"tracy/tracy": "^2.6",
+		"uestla/recaptcha-control": "^8.0"
 	}
 }
