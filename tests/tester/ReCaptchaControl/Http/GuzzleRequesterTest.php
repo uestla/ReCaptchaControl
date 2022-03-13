@@ -8,7 +8,7 @@ use Tester\Assert;
 use GuzzleHttp\Client;
 use ReCaptchaControl\Http\Requester\GuzzleRequester;
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 
 (static function (): void {

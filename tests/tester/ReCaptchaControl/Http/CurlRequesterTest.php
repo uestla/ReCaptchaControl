@@ -8,7 +8,7 @@ use Tester\Assert;
 use ReCaptchaControl\Http\Requester\CurlRequester;
 use ReCaptchaControl\Http\Requester\RequestException;
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 
 // request google.com

@@ -15,7 +15,7 @@ use ReCaptchaControl\Http\Requester\GuzzleRequester;
 use ReCaptchaControl\Http\Requester\SimpleRequester;
 use ReCaptchaControl\Http\Requester\RequestException;
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 
 // invalid fields

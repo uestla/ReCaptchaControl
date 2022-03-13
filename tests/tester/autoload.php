@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/Mocks/CustomRequester.php';
 require_once __DIR__ . '/Mocks/ErrorRequester.php';
 require_once __DIR__ . '/Mocks/RequestFactory.php';
-require_once __DIR__ . '/DI/MyFactory.php';
+require_once __DIR__ . '/ReCaptchaControl/DI/MyFactory.php';
 
 
 // === helpers =========================

@@ -12,7 +12,7 @@ use Tests\Mocks\RequestFactory;
 use ReCaptchaControl\Http\RequestDataProvider;
 use ReCaptchaControl\Http\Requester\CurlRequester;
 
-require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 
 // multiple addRule() error
