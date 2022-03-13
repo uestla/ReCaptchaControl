@@ -9,7 +9,7 @@
 		"issues": "https://github.com/uestla/ReCaptchaControl/issues"
 	},
 	"require": {
-		"php": ">=7.1",
+		"php": ">=7.2",
 		"nette/di": "^3.0",
 		"nette/http": "^3.0",
 		"nette/forms": "^3.0",
