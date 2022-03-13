@@ -8,7 +8,7 @@ use ReCaptchaControl\Control;
 use ReCaptchaControl\Renderer;
 use ReCaptchaControl\Validator;
 use Tests\Mocks\CustomRequester;
-use Nette\Utils\AssertionException;
+use Nette\DI\InvalidConfigurationException;
 use ReCaptchaControl\Http\Requester\IRequester;
 use ReCaptchaControl\Http\Requester\CurlRequester;
 use ReCaptchaControl\Http\Requester\GuzzleRequester;
@@ -24,20 +24,20 @@ require_once __DIR__ . '/../bootstrap.php';
 	// missing keys
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.missing.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, null given.");
+	}, InvalidConfigurationException::class, "The mandatory item 'recaptcha › siteKey' is missing.");
 
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.missing.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, null given.");
+	}, InvalidConfigurationException::class, "The mandatory item 'recaptcha › secretKey' is missing.");
 
 	// invalid types
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.invalid.siteKey.neon');
-	}, AssertionException::class, "The item 'siteKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, int 1 given.");
+	}, InvalidConfigurationException::class, "The item 'recaptcha › siteKey' expects to be string|Nette\DI\Definitions\Statement|Nette\Schema\DynamicParameter, 1 given.");
 
 	Assert::exception(static function (): void {
 		createContainer(__DIR__ . '/config/config.invalid.secretKey.neon');
-	}, AssertionException::class, "The item 'secretKey' in array expects to be string or Nette\DI\Statement or Nette\DI\DynamicParameter, int 1 given.");
+	}, InvalidConfigurationException::class, "The item 'recaptcha › secretKey' expects to be string|Nette\DI\Definitions\Statement|Nette\Schema\DynamicParameter, 1 given.");
 
 })();
 
