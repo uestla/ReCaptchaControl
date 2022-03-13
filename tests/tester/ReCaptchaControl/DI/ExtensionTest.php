@@ -110,7 +110,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 	createContainer(__DIR__ . '/config/config.methodName.neon');
 
 	$form = new Form;
-	$form->addTheSweetRecaptcha('recaptcha');
+	$form->addTheSweetReCaptcha('recaptcha');
 	Assert::type(Control::class, $form['recaptcha']);
 
 })();

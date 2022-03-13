@@ -79,7 +79,7 @@ class Control extends Forms\Controls\BaseControl
 	}
 
 
-	public static function register(Validator $validator, Renderer $renderer, string $method = 'addRecaptcha'): void
+	public static function register(Validator $validator, Renderer $renderer, string $method = 'addReCaptcha'): void
 	{
 		Forms\Container::extensionMethod($method, function ($container, $name, $label = null, $message = null) use ($validator, $renderer) {
 			return $container[$name] = new Control($validator, $renderer, $label, $message);

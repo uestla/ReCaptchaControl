@@ -29,7 +29,7 @@ require_once __DIR__ . '/../bootstrap.php';
 	Control::register($validator, $renderer);
 
 	$form = new Form;
-	$control = $form->addRecaptcha('recaptcha');
+	$control = $form->addReCaptcha('recaptcha');
 
 	Assert::error(static function () use ($control): void {
 		$control->addRule([Control::class, 'validateValid']);

@@ -4,4 +4,4 @@ extensions:
 recaptcha:
 	siteKey: RECAPTCHA_SITEKEY
 	secretKey: RECAPTCHA_SECRETKEY
-	methodName: addTheSweetRecaptcha
+	methodName: addTheSweetReCaptcha
