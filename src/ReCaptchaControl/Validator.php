@@ -54,7 +54,7 @@ class Validator
 	{
 		$response = $this->requestDataProvider->getResponseValue();
 
-		if (!$response) {
+		if ($response === null) {
 			return false;
 		}
 

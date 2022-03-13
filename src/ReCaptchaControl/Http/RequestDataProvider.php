@@ -30,7 +30,9 @@ class RequestDataProvider implements IRequestDataProvider
 
 	public function getResponseValue(): ?string
 	{
-		return $this->httpRequest->getPost(self::RESPONSE_KEY);
+		$response = $this->httpRequest->getPost(self::RESPONSE_KEY);
+		assert($response === null || is_string($response));
+		return $response;
 	}
 
 

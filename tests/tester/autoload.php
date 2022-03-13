@@ -22,8 +22,7 @@ function dd($var): void
 }
 
 
-/** @param  string|mixed[] $config */
-function createContainer($config = null): Container
+function createContainer(string $config): Container
 {
 	$configurator = new Nette\Configurator;
 
@@ -32,9 +31,7 @@ function createContainer($config = null): Container
 	Helpers::purge($tempDir);
 	$configurator->setTempDirectory($tempDir);
 
-	if ($config) {
-		$configurator->addConfig($config);
-	}
+	$configurator->addConfig($config);
 
 	register_shutdown_function(static function () use ($tempDir): void {
 		Helpers::purge($tempDir);

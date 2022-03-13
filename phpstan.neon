@@ -12,4 +12,3 @@ parameters:
 		- tests/tester/autoload.php
 	ignoreErrors:
 		- '#^Call to an undefined method Nette\\Forms\\Form::(addRecaptcha|addTheSweetRecaptcha)\(\)\.\z#'
-		- '#^Call to an undefined method ReCaptchaControl\\Validator::onError\(\).\z#'

@@ -42,8 +42,8 @@ class Control extends Forms\Controls\BaseControl
 	/**
 	 * @param  callable|string $validator
 	 * @param  string|object $message
-	 * @param  string $arg
-	 * @return self
+	 * @param  mixed $arg
+	 * @return static
 	 */
 	public function addRule($validator, $message = null, $arg = null)
 	{
