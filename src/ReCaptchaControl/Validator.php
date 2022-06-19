@@ -70,7 +70,7 @@ class Validator
 
 			try {
 				$json = Json::decode($result);
-				return isset($json->success) && $json->success;
+				return $json instanceof \stdClass && isset($json->success) && $json->success;
 
 			} catch (JsonException $e) {}
 
