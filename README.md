@@ -234,8 +234,8 @@ You may have noticed the [tests/manual](tests/manual) directory. Its content is 
 
 To get it to work on your local machine, do following:
 
-1. copy `app/config/config.local.neon.template` to `app/config/config.local.neon`
-2. fill reCAPTCHA keys properly in `app/config/config.local.neon`
+1. copy `config/local.neon.template` to `config/local.neon`
+2. fill reCAPTCHA keys properly in `config/local.neon`
 3. run `composer install`
 4. run `bower install`
 

@@ -1,2 +1,2 @@
 /composer.lock
-/app/config/config.local.neon
+/config/local.neon

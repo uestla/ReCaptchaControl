@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Presenters;
 
 use Nette\Application\UI\Form;
@@ -7,12 +9,12 @@ use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Multiplier;
 
 
-class TestPresenter extends Presenter
+final class TestPresenter extends Presenter
 {
 
 	// === NON-AJAX FORMS ========================================
 
-	protected function createComponentBasicForm()
+	protected function createComponentBasicForm(): Form
 	{
 		$form = static::factoryForm();
 		$form->onSuccess[] = [$this, 'onFormSuccess'];
@@ -20,7 +22,7 @@ class TestPresenter extends Presenter
 	}
 
 
-	protected function createComponentMultiForm()
+	protected function createComponentMultiForm(): Multiplier
 	{
 		return new Multiplier(function ($name) {
 			$form = static::factoryForm();
@@ -30,7 +32,7 @@ class TestPresenter extends Presenter
 	}
 
 
-	public function onFormSuccess(Form $form)
+	public function onFormSuccess(Form $form): void
 	{
 		$this->flashMessage(sprintf('reCAPTCHA has been validated successfully! (form "%s")', $form->getName()), 'success');
 		$this->redirect('this');
@@ -39,7 +41,7 @@ class TestPresenter extends Presenter
 
 	// === AJAX FORMS ========================================
 
-	protected function createComponentAjaxForm()
+	protected function createComponentAjaxForm(): Form
 	{
 		$form = static::factoryForm();
 
@@ -54,7 +56,7 @@ class TestPresenter extends Presenter
 	}
 
 
-	protected function createComponentMultiAjaxForm()
+	protected function createComponentMultiAjaxForm(): Multiplier
 	{
 		return new Multiplier(function ($name) {
 			$form = static::factoryForm();
@@ -70,7 +72,7 @@ class TestPresenter extends Presenter
 	}
 
 
-	public function onAjaxFormSuccess(Form $form)
+	public function onAjaxFormSuccess(Form $form): void
 	{
 		$this->flashMessage(sprintf('reCAPTCHA has been validated successfully! (form "%s")', $form->getName()), 'success');
 		$this->redrawControl('flashes');
@@ -84,7 +86,7 @@ class TestPresenter extends Presenter
 
 	// === AJAX FORMS ========================================
 
-	protected function createComponentInvisibleForm()
+	protected function createComponentInvisibleForm(): Form
 	{
 		$form = static::factoryInvisibleForm();
 		$form->onSuccess[] = [$this, 'onFormSuccess'];
@@ -92,7 +94,7 @@ class TestPresenter extends Presenter
 	}
 
 
-	protected function createComponentMultiInvisibleForm()
+	protected function createComponentMultiInvisibleForm(): Multiplier
 	{
 		return new Multiplier(function ($name) {
 			$form = static::factoryInvisibleForm();
@@ -104,7 +106,7 @@ class TestPresenter extends Presenter
 
 	// === FORM FACTORY ========================================
 
-	private static function factoryForm()
+	private static function factoryForm(): Form
 	{
 		$form = new Form;
 		$form->addReCaptcha('recaptcha', 'reCAPTCHA for you', "Please prove you're not a robot.");
@@ -113,7 +115,7 @@ class TestPresenter extends Presenter
 	}
 
 
-	private static function factoryInvisibleForm()
+	private static function factoryInvisibleForm(): Form
 	{
 		$form = new Form;
 

@@ -1,23 +1,19 @@
 <?php
 
-namespace App;
+declare(strict_types = 1);
 
-use Nette;
+namespace App\Router;
+
 use Nette\Application\Routers\RouteList;
-use Nette\Application\Routers\Route;
 
 
-class RouterFactory
+final class RouterFactory
 {
-	use Nette\StaticClass;
 
-	/**
-	 * @return Nette\Application\IRouter
-	 */
-	public static function createRouter()
+	public function createRouter(): RouteList
 	{
 		$router = new RouteList;
-		$router[] = new Route('<action>', 'Test:single');
+		$router->addRoute('<action>', 'Test:single');
 		return $router;
 	}
 
