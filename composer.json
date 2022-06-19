@@ -37,7 +37,7 @@
 	"scripts": {
 		"ci": ["@phpstan", "@test"],
 		"phpstan": "phpstan analyse",
-		"test": "tester -C tests/tester/",
+		"test": "tester -C --colors 1 tests/tester/",
 		"test-coverage": "tester -C --coverage-src src/RecaptchaControl --coverage-src tests/tester/ --coverage tests/var/log/coverage.html tests/tester/"
 	},
 	"config": {
