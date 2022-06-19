@@ -23,7 +23,6 @@
 		"phpstan/phpstan-strict-rules": "^1.1",
 		"phpstan/phpstan-deprecation-rules": "^1.0",
 		"tracy/tracy": "^2.9",
-		"latte/latte": "^2.11",
 		"nette/bootstrap": "^3.1",
 		"nette/tester": "^2.4",
 		"guzzlehttp/guzzle": "^7.4"
