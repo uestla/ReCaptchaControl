@@ -13,7 +13,7 @@
 		"nette/di": "^3.0",
 		"nette/http": "^3.0",
 		"nette/forms": "^3.0",
-		"nette/utils": "^3.0",
+		"nette/utils": "^3.0 || ^4.0",
 		"nette/php-generator": "^3.0"
 	},
 	"require-dev": {
