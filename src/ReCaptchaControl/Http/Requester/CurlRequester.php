@@ -67,7 +67,7 @@ class CurlRequester implements IRequester
 	{
 		// NOTE: intentionally not using array_walk since array keys cannot be changed
 		foreach ($options as $key => $val) {
-			if (Strings::startsWith((string) $key, 'CURLOPT_')) {
+			if (substr((string) $key, 0, 8) === 'CURLOPT_') {
 				unset($options[$key]);
 				$options[constant($key)] = $val;
 			}

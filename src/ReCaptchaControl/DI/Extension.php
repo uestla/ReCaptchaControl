@@ -55,7 +55,7 @@ class Extension extends CompilerExtension
 		$builder->addDefinition($this->prefix('requestDataProvider'))
 				->setFactory(RequestDataProvider::class);
 
-		if (Strings::startsWith($this->config->requester, '@')) {
+		if (substr($this->config->requester, 0, 1) === '@') {
 			$requesterService = $this->config->requester;
 
 		} else {

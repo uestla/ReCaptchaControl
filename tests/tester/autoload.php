@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use Tester\Helpers;
 use Nette\DI\Container;
+use Nette\Bootstrap\Configurator;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/Mocks/CustomRequester.php';
@@ -24,7 +25,7 @@ function dd($var): void
 
 function createContainer(string $config): Container
 {
-	$configurator = new Nette\Configurator;
+	$configurator = new Configurator;
 
 	$tempDir = __DIR__ . '/../var/temp/' . getmypid();
 
