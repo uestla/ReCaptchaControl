@@ -74,7 +74,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 
 	Assert::exception(static function () use ($requester): void {
 		$requester->post('https://google.com');
-	}, RequestException::class, 'Cannot fetch URL "https://google.com": error setting certificate verify locations:%A%'); // check also the invalid certificate options right away
+	}, RequestException::class, '#^Cannot fetch URL "https://google.com": error setting certificate (verify locations|file):#'); // check also the invalid certificate options right away
 
 })();
 
